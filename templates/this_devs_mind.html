@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head_title %} This Devs Mind {% endblock %}
+
+<!-- Navbar -->
+{% block navbar %}{% include 'snippets/nav.html' %}{% endblock %}
+
+
+{% block content %}
+
+
+    <!-- First Container: Who am I -->
+    <section>
+        <div class="container-fluid bg-1 text-center">
+
+            <h3 class="">Who Am I?</h3>
+
+            <div id="demo" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{% static 'images/home/me1.jpg' %}" class="rounded-circle my-4" alt="Me 1" width="350" height="350">
+                        <div class="carousel-caption">
+                            <h3>I'm a dancer</h3>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'images/home/me2.jpg' %}" class="rounded-circle my-4 " alt="Me 2" width="350" height="350">
+                        <div class="carousel-caption">
+                            <h3>I'm an adventurer</h3>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'images/home/me3.jpg' %}" class="rounded-circle my-4" alt="Me 2" width="350" height="350">
+                        <div class="carousel-caption">
+                            <h3>I'm a martial artist</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#demo" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+
+
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                </ul>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Second container: My projects -->
+    <section class="js--section-my-projects" id="my-projects">
+        <div class="container-fluid bg-3 text-center">
+            <h3 class="margin">My projects</h3><br>
+            <div class="row">
+                <div class="col-sm-4">
+                    <h4>Peahead</h4>
+                    <p>App to capture part of you that wants to be better and aid in understanding how life is processing through data.</p>
+                    <img src="{% static 'images/home/peahead_dashboard_today_2.jpg' %}" class="img-fluid rounded my_projects_img js--scroll-to-peahead" alt="Peahead">
+                </div>
+                <div class="col-sm-4 ">
+                    <h4>This Devs Mind</h4>
+                    <p>My own person blog where I document and write my journey of becoming developer, dancer and best self I can be.</p>
+                    <img src="{% static 'images/home/blog_main2.jpg' %}" class="img-fluid rounded my_projects_img js--scroll-to-thisdevsmind" alt="Blog">
+                </div>
+                <div class="col-sm-4">
+                    <h4>Dance Connect</h4>
+                    <p>Social media site helping dancers to connect with each other and find events all over the world.</p>
+                    <img src="{% static 'images/home/dance_home.jpg' %}" class="img-fluid rounded my_projects_img js--scroll-to-danceconnect" alt="Dance">
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Fourth Container: Project 1 -->
+<section class="js--section-peahead">
+    <div class="container-fluid bg-5 text-center " id="my-project-peahead" >
+        <h3 class="margin">Project 1: Peahead</h3>
+        <div class="row align-items-center mx-4 justify-content-center">
+            <div class="col-md-4 col-sm-6 offset-md-1">
+                <a href="https://peahead.herokuapp.com">
+                    <img src="{% static 'images/home/peahead_dashboard_today.jpg' %}" class="img-fluid rounded" alt="Peahead Dashboard Today">
+                </a>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <ui>
+                    <li>Django - Python framework</li>
+                    <li>Django ORM and SQLite</li>
+                    <li>Mobile responsive with Bootstrap 3</li>
+                    <li>Pandas, Scikit-learn, Matplotlib</li>
+                </ui>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Third Container: Project 2 -->
+    <section class="js--section-thisdevsmind">
+        <div class="container-fluid bg-2 text-center" id="my-project-thisdevsmind">
+            <h3 class="margin">Project 2: Custom Blog</h3>
+            <div class="row align-items-center mx-4">
+                <div class="col-md-6 col-sm-6">
+                    <ui>
+                        <li>Flask - Python microframework</li>
+                        <li>SQLAlchemy and PostgreSQL</li>
+                        <li>Mobile responsive with Bootstrap 3</li>
+                        <li>Markdown</li>
+                    </ui>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <a href="https://thisdevsmind.herokuapp.com">
+                        <img src="{% static 'images/home/blog_main.jpg' %}" class="img-fluid rounded" alt="Blog">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Fourth Container: Project 3 -->
+    <section class="js--section-danceconnect">
+        <div class="container-fluid bg-6 text-center " id="my-project-danceconnect">
+            <h3 class="margin">Project 3: Dance connect</h3>
+
+            <div class="row align-items-center mx-4 justify-content-center">
+                <div class="col-md-4 col-sm-6 offset-md-1">
+                    <img src="{% static 'images/home/dance_home.jpg' %}" class="img-fluid rounded" alt="Dance Dashboard Today">
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <ui>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Ut enim ad minim veniam, quis nostrud </li>
+                        <li>Sed ut perspiciatis unde omnis </li>
+                        <li>At vero eos et accusamus et iusto odio dignissimos</li>
+                    </ui>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head_title %} {{ block.super }} Event - {{ event.name }} {% endblock %}
+
+<!-- Navbar -->
+{% block navbar %}{% include 'snippets/nav.html' %}{% endblock %}
+
+
+{% block content %}
+
+    <section>
+        <div class="container event_main_bg">
+
+                <div class ="eventDetail">
+                    <div class="row">
+                        {% with title_url="web_res/event_list/" event_id=event.id|slugify %}
+                            {% with title_url_img=title_url|add:event_id|add:".jpg"%}
+                                <img class="title_img rounded mx-auto " src="{% static title_url_img %}">
+{#                                <img class="title_img rounded mx-auto " src="{% static "web_res/event_list/" %}/{{ event.id }}.jpg">#}
+                            {% endwith %}
+                        {% endwith %}
+                    </div>
+                    <div class="row">
+                        <h1> {{ event.name }} </h1>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <i class="icon ion-ios-person-outline mx-3"></i>Hosted by: {{ event.creator }}
+                    </div>
+                    <div class="row">
+                        <i class="icon ion-ios-location-outline mx-3"></i> {{ event.location }}
+                    </div>
+                    <div class="row">
+                        <i class="icon ion-android-time mx-3"></i> {{ event.start }} - {{ event.end }}
+                    </div>
+                    <div class="row">
+                        <i class="ion-ios-pricetags-outline mx-3">  {{ event.list_category }}</i>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <pre> {{ event.description }}</pre>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head_title %} {{ block.super }} Home {% endblock %}
+
+<!-- Navbar -->
+{% block navbar %}{% include 'snippets/nav.html' %}{% endblock %}
+
+
+{% block content %}
+
+
+    <section>
+        <div class="container-fluid bg-1 text-center">
+
+            <h3 class="">Welcome to Dance Connect</h3>
+            <h4>Where dancers to find events and each other</h4>
+
+        </div>
+    </section>
+
+    <section>
+        <div class="container-fluid event_main_bg">
+            <h1 class="text-center"> Latest events happening around you! </h1>
+
+            <div class="row">
+                {% for event in events_list %}
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+
+                        {% include 'snippets/event_box.html' %}
+
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+<!-- Fourth Container: Project 1 -->
+<section class="js--section-peahead">
+    <div class="container-fluid bg-5 text-center " id="my-project-peahead" >
+        <h3 class="margin">Project 1: Peahead</h3>
+        <div class="row align-items-center mx-4 justify-content-center">
+            <div class="col-md-4 col-sm-6 offset-md-1">
+                <a href="#">
+                    <img src="{% static 'images/home/peahead_dashboard_today.jpg' %}" class="img-fluid rounded" alt="Peahead Dashboard Today">
+                </a>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <ui>
+                    <li>Django - Python framework</li>
+                    <li>Django ORM and SQLite</li>
+                    <li>Mobile responsive with Bootstrap 3</li>
+                    <li>Pandas, Scikit-learn, Matplotlib</li>
+                </ui>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Third Container: Project 2 -->
+    <section class="js--section-thisdevsmind">
+        <div class="container-fluid bg-2 text-center" id="my-project-thisdevsmind">
+            <h3 class="margin">Project 2: Custom Blog</h3>
+            <div class="row align-items-center mx-4">
+                <div class="col-md-6 col-sm-6">
+                    <ui>
+                        <li>Flask - Python microframework</li>
+                        <li>SQLAlchemy and PostgreSQL</li>
+                        <li>Mobile responsive with Bootstrap 3</li>
+                        <li>Markdown</li>
+                    </ui>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <a href="#">
+                        <img src="{% static 'images/home/blog_main.jpg' %}" class="img-fluid rounded" alt="Blog">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Fourth Container: Project 3 -->
+    <section class="js--section-danceconnect">
+        <div class="container-fluid bg-6 text-center " id="my-project-danceconnect">
+            <h3 class="margin">Project 3: Dance connect</h3>
+
+            <div class="row align-items-center mx-4 justify-content-center">
+                <div class="col-md-4 col-sm-6 offset-md-1">
+                    <a href="#">
+                        <img src="{% static 'images/home/dance_home.jpg' %}" class="img-fluid rounded" alt="Dance Dashboard Today">
+                    </a>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <ui>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Ut enim ad minim veniam, quis nostrud </li>
+                        <li>Sed ut perspiciatis unde omnis </li>
+                        <li>At vero eos et accusamus et iusto odio dignissimos</li>
+                    </ui>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock %}
+
+</body>
+</html>

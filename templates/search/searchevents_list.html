@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head_title %} {{ block.super }} Events {% endblock %}
+
+<!-- Navbar -->
+{% block navbar %}{% include 'snippets/nav.html' %}{% endblock %}
+
+
+{% block content %}
+
+    <section>
+        <div class="container-fluid event_main_bg">
+            <h1 class="text-center"> Search for a event </h1>
+            <div class="row justify-content-center">
+                <a href="#">Advance Search</a>
+            </div>
+            <div class="row justify-content-center my-3">
+                <form class="form-inline" method="GET" action="">
+                    <div class="form-group mx-sm-3">
+                        <input type="text" placeholder="Search..." name="q" class="form-control" value="{{ request.GET.q }}">
+                    </div>
+                    <button type="submit" class="btn btn-default">Search</button>
+                </form>
+            </div>
+
+            <div class="row">
+            {% for event in object_list %}
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+
+                {% include 'snippets/event_box.html' %}
+
+                </div>
+            {% endfor %}
+            </div>
+
+        </div>
+    </section>
+
+
+
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock %}
+
+</body>
+</html>

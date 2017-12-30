@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block head_title %} Dance Connect | {% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% include 'snippets/css.html' %}
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+</head>
+<body>
+
+    <!-- Navbar -->
+    {% block navbar %}{% endblock %}
+
+    <!-- Main content -->
+    {% block content %}{% endblock %}
+
+    <!-- Footer -->
+    {% block footer %}{% endblock %}
+
+    <!-- Scripts -->
+    {% include 'snippets/js.html' %}
+
+</body>
+</html>

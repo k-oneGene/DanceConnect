@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block navbar %}{% include 'snippets/nav.html' %}{% endblock %}
+
+{% block content %}
+    <div class="container-fluid event_main_bg">
+        <div class="container event_main_bg">
+            {% block content_reg %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

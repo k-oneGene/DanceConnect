@@ -1,0 +1,19 @@
+{% extends 'registration/base_registration.html' %}
+
+{% block head_title %} {{ block.super }} Login {% endblock %}
+
+
+{% block content_reg %}
+    <h2>Login</h2>
+    <form class="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <a href="{% url 'profiles:signup' %}">Sign up</a>
+    <br>
+    <a href="{% url 'profiles:password_reset' %}">Forgot password</a>
+    <br>
+    <a href="{% url 'profiles:password_reset_complete' %}">=-testing-=</a>
+
+{% endblock %}

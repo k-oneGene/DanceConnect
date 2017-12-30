@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head_title %} {{ block.super }} Profile - {{ profile.user.username }} {% endblock %}
+
+<!-- Navbar -->
+{% block navbar %}{% include 'snippets/nav.html' %}{% endblock %}
+
+
+{% block content %}
+
+    <section>
+        <div class="container event_main_bg">
+            <div class="">
+                <div class ="eventDetail">
+                    {% include 'profiles/snippets/user_info.html' %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock %}
+
+</body>
+</html>
