@@ -1,0 +1,393 @@
+body {
+    font: 14px Montserrat, sans-serif;
+    /*font: 14px Roboto, sans-serif;*/
+    /*font-family: 'Alegreya Sans', sans-serif;*/
+    /*font-size: 14px;*/
+
+    line-height: 1.8;
+    color: #f5f6f7;
+}
+
+.margin {margin-bottom: 45px;}
+.bg-1 {
+    /*background-color: #1abc9c; !* Green *!*/
+    /*color: #ffffff;*/
+    background-image:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.1)), url("../images/home/main.jpg");
+    background-size: cover; /* whole image on screen */
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh; /* 100% of viewport */
+}
+
+.bg-1 h3 {
+    margin-top: 40vh;
+}
+
+.bg-2 {
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+}
+.bg-3 {
+    background-color: #ffffff; /* White */
+    color: #555555;
+}
+
+/*.bg-4 {*/
+    /*background-color: #2f2f2f; !* Black Gray *!*/
+    /*color: #fff;*/
+/*}*/
+
+.bg-6 {
+    background-color: #438496;
+    color: #fff;
+}
+
+.container-fluid {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+.navbar {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+    background-color: #515151;
+    /*background-color: #f8f8f8;*/
+}
+
+.navbar-light .navbar-brand {
+    color: #777777;
+    font-size: 18px;
+}
+
+.navbar li {
+    margin:0 30px 0 0;
+}
+
+.navbar li a {
+    color: #777777;
+    text-decoration: none
+}
+
+.navbar-nav li a:hover {
+    color: #1abc9c !important;
+}
+
+
+/* Carousel */
+
+.carousel-item {
+    padding-bottom: 90px;
+}
+
+.carousel-indicators {
+    bottom: -50px;
+    /*position: relative;*/
+}
+
+.carousel-indicators > li {
+    border-radius: 10px;
+    margin: 1px 3px;
+    height: 10px;
+    max-width: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: transparent;
+}
+
+.carousel-indicators .active {
+    background-color: rgba(255, 255, 255, 0.4);
+    max-width: 12px;
+    margin: 0 3px;
+    height: 12px;
+}
+
+
+
+.carousel-caption {
+    bottom: 5px
+}
+
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    height: 15px;
+    width: 15px;
+    outline: black;
+    background-size: 100%, 100%;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background-image: none;
+}
+
+/*.carousel-control-next-icon:after {*/
+    /*content: '>';*/
+    /*font-size: 55px;*/
+    /*color: red;*/
+/*}*/
+
+/*.carousel-control-prev-icon:after {*/
+    /*content: '<';*/
+    /*font-size: 55px;*/
+    /*color: red;*/
+/*}*/
+
+
+/* Home page */
+
+/*.ximg {*/
+    /*position: relative;*/
+    /*float: left;*/
+    /*width:  100px;*/
+    /*height: 100px;*/
+    /*background-position: 50% 50%;*/
+    /*background-repeat:   no-repeat;*/
+    /*background-size:     cover;*/
+/*}*/
+
+.my_projects_img {
+    width: 100%;
+    background-repeat:   no-repeat;
+    background-size:     cover;
+}
+
+
+/* SECTION PROJECT*/
+
+.demo_img {
+    min-width: 315px;
+}
+
+
+
+
+/* ====== */
+/* FOOTER */
+/* ====== */
+
+
+/*.bg-4 {*/
+    /*background-color: #2f2f2f; !* Black Gray *!*/
+    /*color: #fff;*/
+/*}*/
+
+
+footer {
+    background-color: #2f2f2f;
+    color: #fff;
+
+    font-size: 100%;
+
+    /*height:60px;			!* Height of the footer *!*/
+    /*background:#6cf;*/
+
+}
+
+footer p {
+    color: #888;
+    /*text-align: right;*/
+    margin-top: 15px;
+}
+
+.footer-nav {
+    list-style: none;
+    float: left;
+}
+
+.social-links {
+    list-style: none;
+    float: right;
+}
+
+.footer-nav li,
+.social-links li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.footer-nav li:last-child,
+.social-links li:last-child {
+    margin: 0px
+}
+
+.footer-nav li a:link,
+.footer-nav li a:visited,
+.social-links li a:link,
+.social-links li a:visited {
+    text-decoration: none;
+    border: 0px;
+    color: #888;
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+}
+
+.footer-nav li a:hover,
+.footer-nav li a:active {
+    color: #ddd;
+}
+
+.social-links li a:link,
+.social-links li a:active {
+    font-size: 160%;
+}
+
+.ion-social-facebook,
+.ion-social-twitter,
+.ion-social-googleplus,
+.ion-social-instagram,
+.ion-email {
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+}
+
+
+
+.ion-social-facebook:hover {
+    color: #3b5998;
+}
+
+.ion-social-twitter:hover {
+    color: #00b6f1;
+}
+
+.ion-social-googleplus:hover {
+    color: #df4a32;
+}
+
+.ion-social-instagram:hover {
+    color: #a048a4;
+}
+
+.ion-email:hover {
+    color: #ffd548;
+}
+
+
+
+/* Nav_info */
+
+
+
+
+/**************/
+/* Event_list */
+/**************/
+
+.event_main_bg {
+    background-color: #ffffff; /* White */
+    color: #555555;
+    font-size: 1em;
+}
+
+.event_main_bg_2 {
+    background-color: #f4f4f4; /* White */
+    color: #555555;
+    font-size: small;
+}
+
+
+
+/*Box for events with height limit*/
+.event {
+    /*width: 300px;*/
+    max-height: 750px;
+    border: 1px solid #dedede;
+    padding: 25px;
+    padding-bottom: 750px;
+    margin: 25px;
+    background-color: rgba(196, 196, 196, 0.46);
+
+    /* Required for text-overflow to do anything */
+    overflow: hidden;
+    /*padding-bottom: 900px;*/
+}
+
+.event h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.event a h1 {
+    /*color: #293442;*/
+    color: rgb(85, 85, 85);
+;
+}
+
+.event a h1:hover {
+    color: #040608;
+}
+
+.event img {
+    width:100%;
+    height:100%;
+    min-height: 200px;
+    max-height: 200px;
+    min-width: 200px;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+/*.title_img {*/
+    /*width:100%;*/
+    /*height:100%;*/
+    /*min-height: 200px;*/
+    /*max-height: 200px;*/
+    /*min-width: 200px;*/
+    /*object-fit: cover;*/
+    /*overflow: hidden;*/
+/*}*/
+
+pre {
+    white-space: pre-wrap;
+    word-break: keep-all;
+    font-family: inherit;
+}
+
+
+/*EventsDetail*/
+
+/*Box for events without height limit*/
+
+.eventDetail {
+    max-height: none;
+    border: 1px solid #dedede;
+    padding: 25px;
+    margin: 25px;
+    background-color: rgba(196, 196, 196, 0.46);
+}
+
+
+/*EventMini*/
+.eventMini {
+    min-height: 450px;
+    max-height: 450px;
+    border: 1px solid #dedede;
+    padding: 20px;
+    margin: 5px;
+    background-color: rgba(196, 196, 196, 0.46);
+
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.eventMini img {
+    min-height: 130px;
+    max-height: 130px;
+    min-width: auto;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+/*        */
+/* SEARCH */
+/*        */
+
+
+.nav-search {
+    /*font-weight: bold;*/
+}
