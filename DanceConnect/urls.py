@@ -14,10 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 
 from .views import HomeView
+
+# from .settings import DEBUG
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,8 +30,13 @@ urlpatterns = [
     path('profiles/', include('profiles.urls', namespace='profiles')),
     path('search/', include('search.urls', namespace='search')),
 
-    path('', include('django.contrib.auth.urls')), # TODO: I remember fixing this issue before with another url. Maybe It was different issue?
+    # path('profiles/', include('django.contrib.auth.urls')), # TODO: I remember fixing this issue before with another url. Maybe It was different issue?
 
 
 ]
 
+# if DEBUG:
+#     import debug_toolbar
+#     urlpatterns = [
+#                       re_path(r'__debug__/', include(debug_toolbar.urls)),
+#                   ] + urlpatterns

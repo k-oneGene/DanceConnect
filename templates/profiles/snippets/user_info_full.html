@@ -1,0 +1,35 @@
+{% load static %}
+
+<div class="row ">
+    {% with title_url="web_res/profile_list/" event_id=profile.id|slugify %}
+        {% with title_url_img=title_url|add:event_id|add:".jpg"%}
+            <img class="title_img rounded img-fluid mx-auto " src="{% static title_url_img %}">
+        {% endwith %}
+    {% endwith %}
+</div>
+<div class="row">
+    <h1> {{ profile.user.username }} </h1>
+</div>
+<div class="row">
+    <small> {{ profile.user.first_name }} {{ profile.user.last_name }} </small>
+</div>
+<hr>
+<div class="row">
+    <i class="icon ion-ios-calendar-outline mx-3">  {{ profile.date_of_birth }}</i>
+</div>
+<div class="row">
+    <i class="ion-ios-pricetags-outline mx-3">  {{ profile.list_category }}</i>
+</div>
+<hr>
+<div class="row">
+    {% if user.is_authenticated and profile.user_id == request.user.profile.user_id %}
+        <div class="col-sm-12 text-left">
+            <a href="{% url 'profiles:update'%}" class="">Update</a>
+        </div>
+    {% endif %}
+</div>
+<div class="row ">
+    <div class="col-sm-12">
+        <pre> {{ profile.bio }}</pre>
+    </div>
+</div>

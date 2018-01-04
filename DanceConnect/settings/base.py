@@ -31,12 +31,20 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'dal', # django-autocomplete-light
+    'dal_select2', # django-autocomplete-light
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django_extensions',
+
+    # 'debug_toolbar', # debug-toolbar
+    'crispy_forms',
 
     'profiles',
     'events',
@@ -51,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware', # debug-toolbar
 ]
 
 ROOT_URLCONF = 'DanceConnect.urls'
@@ -132,5 +142,11 @@ STATICFILES_DIRS = (
 
 
 # Login/Logout
+LOGIN_URL = '/profiles/login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'profiles:login'
+
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+

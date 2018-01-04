@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head_title %} {{ block.super }} Search - {% endblock %}
+
+<!-- Navbar -->
+{% block navbar %}{% include 'snippets/nav.html' %} <br> {% include 'search/snippets/nav.html' %}{% endblock %}
+
+
+{% block content %}
+    <div class="container-fluid event_main_bg">
+        {% block content_search %}
+        {% endblock %}
+        {% include 'search/snippets/pagination_nav.html' %}
+    </div>
+{% endblock %}
+
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock %}
+
+</body>
+</html>

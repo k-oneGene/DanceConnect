@@ -1,6 +1,9 @@
 from django.db import models
 from django.conf import settings
 from django.db.models import Q
+from django.db.models.signals import pre_save
+
+from .utils import unique_slug_generator
 
 User = settings.AUTH_USER_MODEL
 
@@ -29,6 +32,7 @@ class EventManager(models.Manager):
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
     description = models.TextField(null=True, blank=True)
+    slug = models.SlugField(blank=True)
 
     def __str__(self):
         return self.name
@@ -46,7 +50,7 @@ class Event(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    object = EventManager()
+    objects = EventManager()
 
     def __str__(self):
         return f'{self.start} - {self.name}'
@@ -54,3 +58,12 @@ class Event(models.Model):
     def list_category(self):
         all_cat = ', '.join([category.name for category in self.categories.all()])
         return all_cat
+
+
+def rl_pre_save_receiver(sender, instance, *args, **kwargs):
+    instance.name = instance.name.capitalize()
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+
+pre_save.connect(rl_pre_save_receiver, sender=Category)

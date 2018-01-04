@@ -13,7 +13,8 @@ class ProfileManagerQuerySet(models.query.QuerySet):
     def search(self, query): #Profiles.objects.all().search(query) OR Profiles.objects.filter().search(query)
         return self.filter(
             Q(user__username__icontains=query)|
-            Q(date_of_birth__icontains=query)
+            Q(date_of_birth__icontains=query)|
+            Q(categories__name__icontains=query)
         ).distinct()
         # return self.filter(user__username__contains=query)
 
@@ -30,6 +31,7 @@ class Profile(models.Model):
     # activated = models.BooleanField(default=False)
 
     date_of_birth = models.DateField(null=False, blank=False)
+    gender = models.CharField(max_length=40)
     address = models.CharField(max_length=120)
 
     categories = models.ManyToManyField(Category, blank=True)

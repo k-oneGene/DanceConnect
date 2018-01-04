@@ -1,0 +1,57 @@
+{% extends 'search/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block head_title %} {{ block.super }} Events {% endblock %}
+
+
+{% block content_search %}
+    <h1 class="text-center"> Search for a event </h1>
+
+    <div class="container">
+        <div class="row justify-content-center my-3 eventDetail rounded">
+            <form class="" method="GET" action="">
+                <div class="form-row">
+                    <div class="form-group mx-sm-3">
+                        <label for="event">Event</label>
+                        <input type="text" placeholder="Event..." name="q_event" id="event" class="form-control" value="{{ request.GET.q_event }}">
+                    </div>
+                    <div class="form-group mx-sm-3">
+                        <label for="date">Date</label>
+                        <input type="date" placeholder="Search..." name="q_date" id="date" class="form-control" value="{{ request.GET.q_date }}">
+                    </div>
+                    <div class="form-group mx-sm-3">
+                        <label for="location">Date</label>
+                        <input type="text" placeholder="Location..." name="q_location" id="location" class="form-control" value="{{ request.GET.q_location }}">
+                    </div>
+                </div>
+                <div class="form-check mx-sm-3">
+                {% for category in form.categories %}
+                    <label class="btn btn-info">
+{#                        <input type="checkbox" name="categories" value="{{ category.choice_label }}">#}
+                        {{ category.tag }}{{ category.choice_label }}
+                    </label>
+                {% endfor %}
+                </div>
+                <div class="text-center">
+                <button type="submit" class="btn btn-warning">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+    {% for event in object_list %}
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            {% include 'events/snippets/event_box_full.html' %}
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock %}
+
+</body>
+</html>

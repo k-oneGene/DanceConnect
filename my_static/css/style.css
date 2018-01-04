@@ -1,9 +1,13 @@
 body {
-    font: 20px Montserrat, sans-serif;
+    font: 14px Montserrat, sans-serif;
+    /*font: 14px Roboto, sans-serif;*/
+    /*font-family: 'Alegreya Sans', sans-serif;*/
+    /*font-size: 14px;*/
+
     line-height: 1.8;
     color: #f5f6f7;
 }
-p {font-size: 16px;}
+
 .margin {margin-bottom: 45px;}
 .bg-1 {
     /*background-color: #1abc9c; !* Green *!*/
@@ -32,11 +36,6 @@ p {font-size: 16px;}
     /*background-color: #2f2f2f; !* Black Gray *!*/
     /*color: #fff;*/
 /*}*/
-
-.bg-5 {
-    background-color: #373737;
-    color: blanchedalmond;
-}
 
 .bg-6 {
     background-color: #438496;
@@ -279,18 +278,18 @@ footer p {
 .event_main_bg {
     background-color: #ffffff; /* White */
     color: #555555;
+    font-size: 1em;
+}
+
+.event_main_bg_2 {
+    background-color: #f4f4f4; /* White */
+    color: #555555;
     font-size: small;
 }
 
-.title_img {
-    width:100%;
-    height:100%;
-    min-height: 200px;
-    max-height: 400px;
-    object-fit: cover;
-    overflow: hidden;
-}
 
+
+/*Box for events with height limit*/
 .event {
     /*width: 300px;*/
     max-height: 750px;
@@ -305,30 +304,81 @@ footer p {
     /*padding-bottom: 900px;*/
 }
 
-/*.event_img_container {*/
-    /*width: auto;*/
-    /*max-height: 300px;*/
-    /*background-size: cover;*/
-    /*background-repeat: no-repeat;*/
-    /*background-position: 50% 50%;*/
-/*}​*/
+.event h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: 5px;
+}
 
+.event a h1 {
+    /*color: #293442;*/
+    color: rgb(85, 85, 85);
+;
+}
 
-/*.icon {*/
-    /*display: inline-block;*/
+.event a h1:hover {
+    color: #040608;
+}
+
+.event img {
+    width:100%;
+    height:100%;
+    min-height: 200px;
+    max-height: 200px;
+    min-width: 200px;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+/*.title_img {*/
+    /*width:100%;*/
+    /*height:100%;*/
+    /*min-height: 200px;*/
+    /*max-height: 200px;*/
+    /*min-width: 200px;*/
+    /*object-fit: cover;*/
+    /*overflow: hidden;*/
 /*}*/
 
 pre {
     white-space: pre-wrap;
-    word-break:keep-all;
+    word-break: keep-all;
+    font-family: inherit;
 }
 
 
 /*EventsDetail*/
 
+/*Box for events without height limit*/
+
 .eventDetail {
+    max-height: none;
     border: 1px solid #dedede;
     padding: 25px;
     margin: 25px;
     background-color: rgba(196, 196, 196, 0.46);
+}
+
+
+/*EventMini*/
+.eventMini {
+    min-height: 450px;
+    max-height: 450px;
+    border: 1px solid #dedede;
+    padding: 20px;
+    margin: 5px;
+    background-color: rgba(196, 196, 196, 0.46);
+
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.eventMini img {
+    min-height: 130px;
+    max-height: 130px;
+    min-width: auto;
+    object-fit: cover;
+    overflow: hidden;
 }

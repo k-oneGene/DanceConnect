@@ -13,7 +13,7 @@
     <section>
         <div class="container event_main_bg">
 
-                <div class ="eventDetail">
+                <div class ="event eventDetail">
                     <div class="row">
                         {% with title_url="web_res/event_list/" event_id=event.id|slugify %}
                             {% with title_url_img=title_url|add:event_id|add:".jpg"%}
@@ -22,7 +22,7 @@
                             {% endwith %}
                         {% endwith %}
                     </div>
-                    <div class="row">
+                    <div class="row ">
                         <h1> {{ event.name }} </h1>
                     </div>
                     <hr>

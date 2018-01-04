@@ -1,4 +1,5 @@
 {% extends 'registration/base_registration.html' %}
+{% load crispy_forms_tags %}
 
 {% block head_title %} {{ block.super }} Login {% endblock %}
 
@@ -7,13 +8,12 @@
     <h2>Login</h2>
     <form class="" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form|crispy }}
         <button type="submit">Login</button>
     </form>
     <a href="{% url 'profiles:signup' %}">Sign up</a>
     <br>
     <a href="{% url 'profiles:password_reset' %}">Forgot password</a>
     <br>
-    <a href="{% url 'profiles:password_reset_complete' %}">=-testing-=</a>
-
+    <a href="{% url 'profiles:profile' %}">=-testing-=</a>
 {% endblock %}

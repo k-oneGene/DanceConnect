@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head_title %} {{ block.super }} Dances - {{ category.name }} {% endblock %}
+
+<!-- Navbar -->
+{% block navbar %}{% include 'snippets/nav.html' %}{% endblock %}
+
+
+{% block content %}
+
+    <div class="container event_main_bg">
+
+            <div class ="event eventDetail">
+                <div class="row">
+                    {% with title_url="web_res/category_list/" category_id=category.slug|slugify %}
+                        {% with title_url_img=title_url|add:category_id|add:".jpg"%}
+                            <img class="title_img rounded mx-auto " src="{% static title_url_img %}">
+                        {% endwith %}
+                    {% endwith %}
+                </div>
+                <div class="row ">
+                    <h1> {{ category.name }} </h1>
+                </div>
+                <hr>
+                <div class="row">
+                    <pre> {{ category.description }}</pre>
+                </div>
+            </div>
+    </div>
+
+    <div class="container-fluid event_main_bg">
+        <h1 class="text-center"> {{ category.name|title }} events happening </h1>
+        <div class="row">
+            {% for event in events_list %}
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    {% include 'events/snippets/event_box_mini.html' %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row justify-content-center">
+            <a href='{% url 'events:list' %}'>Find more events</a>
+        </div>
+    </div>
+
+    <div class="container-fluid event_main_bg_2 ">
+        <h3 class="text-center">{{ category.name }} teachers </h3>
+        <div class="row">
+            {% for profile in profiles_list %}
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class ="event eventMini">
+                        {% include 'profiles/snippets/user_info_mini.html' %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row justify-content-center">
+            <a href='{% url 'profiles:list' %}'>Find more users</a>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock %}
+
+</body>
+</html>

@@ -2,14 +2,15 @@ from django.shortcuts import render, get_object_or_404
 
 from django.views.generic import ListView, DetailView
 
-from .models import Event
+from .models import Event, Category
+from profiles.models import Profile
 
 # Create your views here.
 
 
 class EventListView(ListView):
     def get_queryset(self):
-        return Event.objects.all()
+        return Event.objects.all().order_by('-start')
 
 
 class EventDetailView(DetailView):
@@ -25,3 +26,20 @@ class EventDetailView(DetailView):
         return obj
         # return Event.objects.filter(id)
     """
+
+
+class CategoryListView(ListView):
+    model = Category
+
+
+class CategoryListInfoListView(DetailView):
+    model = Category
+    template_name = 'events/category_list_info_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CategoryListInfoListView, self).get_context_data(**kwargs)
+        category = self.get_object()
+        context['events_list'] = Event.objects.filter(categories=category).order_by('-start')
+        context['profiles_list'] = Profile.objects.filter(categories=category)
+        return context
+

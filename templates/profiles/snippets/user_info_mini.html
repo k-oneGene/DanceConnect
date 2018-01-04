@@ -1,0 +1,28 @@
+{% load static %}
+
+<div class="row ">
+    {% with title_url="web_res/profile_list/" event_id=profile.id|slugify %}
+        {% with title_url_img=title_url|add:event_id|add:".jpg"%}
+            <img class="title_img rounded mx-auto " src="{% static title_url_img %}">
+        {% endwith %}
+    {% endwith %}
+</div>
+<div class="row mx-0">
+    <a href="{% url 'profiles:detail' pk=profile.id %}" class=""><h1> {{ profile.user.username }} </h1> </a>
+</div>
+<div class="row mx-0">
+    <small> {{ profile.user.first_name }} {{ profile.user.last_name }} </small>
+</div>
+<hr>
+<div class="row">
+    <i class="icon ion-ios-calendar-outline mx-1">  {{ profile.date_of_birth }}</i>
+</div>
+<div class="row">
+    <i class="ion-ios-pricetags-outline mx-1">  {{ profile.list_category }}</i>
+</div>
+<hr>
+<div class="row ">
+    <div class="col-sm-12">
+        <pre> {{ profile.bio|truncatewords_html:20 }}</pre>
+    </div>
+</div>

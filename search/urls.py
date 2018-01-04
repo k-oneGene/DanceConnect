@@ -2,13 +2,17 @@ from django.urls import path
 from .apps import SearchConfig
 
 from .views import (
+    SearchHomeView,
     SearchEventsListview,
-    SearchProfilesListview
+    SearchProfilesListview,
+    AdvanceSearchEventsListView
 )
 
 app_name = SearchConfig.name
 
 urlpatterns = [
-    path('events/', SearchEventsListview.as_view(), name="SearchEvents"),
-    path('profiles/', SearchProfilesListview.as_view(), name="SearchProfiles"),
+    path('', SearchHomeView.as_view(), name="home"),
+    path('events/', SearchEventsListview.as_view(), name="events"),
+    path('events-advance/', AdvanceSearchEventsListView.as_view(), name="events-advance"),
+    path('profiles/', SearchProfilesListview.as_view(), name="profiles"),
 ]

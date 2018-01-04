@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView
 
 from events.models import Event
+from profiles.models import Profile
 
 # Create your views here.
 
@@ -12,7 +13,8 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['events_list'] = Event.objects.order_by('start')[0:3]
+        context['events_list'] = Event.objects.order_by('-start')[0:4]
+        context['profiles_list'] = Profile.objects.order_by('-user__date_joined')[0:4]
         return context
 
 
