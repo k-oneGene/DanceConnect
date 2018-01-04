@@ -1,1 +1,1 @@
-web: gunicorn peahead.wsgi
+web: gunicorn DanceConnect.wsgi
