@@ -9,8 +9,13 @@ from events.models import Event
 class AdvanceSearchForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
-        super(AdvanceSearchForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
+        super().__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control'
+            })
+        # self.fields['type'].required = False
+        self.label_suffix = ''
 
     name = forms.CharField(required=False, widget=TextInput(attrs={'placeholder': "Event...", 'name': "q_event", 'id': "event", 'class': "form-control"}))
     date = forms.DateField(required=False)
@@ -20,7 +25,11 @@ class AdvanceSearchForm(forms.ModelForm):
         model = Event
         fields = [
             'categories',
+            # 'type',
         ]
         widgets = {
             'categories': CheckboxSelectMultiple(),
+        }
+        labels = {
+            'type': 'Type'
         }

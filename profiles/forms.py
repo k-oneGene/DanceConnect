@@ -11,12 +11,16 @@ class ProfileForm(forms.ModelForm):
                 'date_of_birth',
                 'address',
                 'gender',
+                'teacher',
                 'categories',
                 'bio'
         ]
         widgets = {
             'categories': CheckboxSelectMultiple(),
             'gender': Select(choices=(('Male', 'Male'), ('Female', 'Female')))
+        }
+        labels = {
+            'teacher': 'Are you a dance teacher?'
         }
 
     def __init__(self, user=None, *args, **kwargs):

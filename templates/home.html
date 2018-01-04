@@ -21,7 +21,7 @@
     </section>
 
     <section>
-        <div class="container-fluid event_main_bg">
+        <div class="container-fluid event_main_bg_2">
             <h1 class="text-center"> Latest events happening around you! </h1>
             <div class="row">
                 {% for event in events_list %}
@@ -32,6 +32,22 @@
             </div>
             <div class="row justify-content-center">
                 <a href='{% url 'events:list' %}'>Find more events</a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container-fluid event_main_bg">
+            <h1 class="text-center"> Latest dance festivals! </h1>
+            <div class="row">
+                {% for event in festivals_list %}
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        {% include 'events/snippets/event_box_mini.html' %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row justify-content-center">
+                <a href='{% url 'search:festivals' %}'>Find more festivals</a>
             </div>
         </div>
     </section>

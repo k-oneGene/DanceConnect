@@ -31,6 +31,7 @@ class EventManager(models.Manager):
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
+    description_short = models.TextField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     slug = models.SlugField(blank=True)
 
@@ -43,6 +44,7 @@ class Event(models.Model):
     categories = models.ManyToManyField(Category, blank=True)
     name = models.CharField(max_length=120)
     location = models.CharField(max_length=120)
+    type = models.CharField(max_length=30, choices=(('event', 'event'), ('festival', 'festival')))
     description = models.TextField(null=True, blank=True)
     start = models.DateTimeField()
     end = models.DateTimeField() # todo: need validation to check start/end is smaller/bigger

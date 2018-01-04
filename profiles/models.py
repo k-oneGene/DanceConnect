@@ -29,14 +29,14 @@ class ProfileManager(models.Manager):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # activated = models.BooleanField(default=False)
-
     date_of_birth = models.DateField(null=False, blank=False)
     gender = models.CharField(max_length=40)
     address = models.CharField(max_length=120)
 
     categories = models.ManyToManyField(Category, blank=True)
-    # todo: student/teacher/status?
     bio = models.TextField()
+
+    teacher = models.BooleanField()
 
     objects = ProfileManager() # adding to Model.objects.all()
 
