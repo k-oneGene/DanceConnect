@@ -13,7 +13,8 @@ class ProfileForm(forms.ModelForm):
                 'gender',
                 'teacher',
                 'categories',
-                'bio'
+                'bio',
+                'image',
         ]
         widgets = {
             'categories': CheckboxSelectMultiple(),

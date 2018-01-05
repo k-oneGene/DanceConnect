@@ -1,11 +1,15 @@
 {% load static %}
 
 <div class="row ">
-    {% with title_url="web_res/profile_list/" event_id=profile.id|slugify %}
-        {% with title_url_img=title_url|add:event_id|add:".jpg"%}
-            <img class="title_img rounded img-fluid mx-auto " src="{% static title_url_img %}">
+    {% if profile.image %}
+        <img class="title_img rounded img-fluid mx-auto " src="{{ profile.image.url }}">
+    {% else %}
+        {% with title_url="web_res/profile_list/" event_id=profile.id|slugify %}
+            {% with title_url_img=title_url|add:event_id|add:".jpg"%}
+                <img class="title_img rounded img-fluid mx-auto " src="{% static title_url_img %}">
+            {% endwith %}
         {% endwith %}
-    {% endwith %}
+    {% endif %}
 </div>
 <div class="row">
     <h1> {{ profile.user.username }} </h1>

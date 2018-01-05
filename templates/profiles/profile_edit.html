@@ -11,7 +11,7 @@
 {% block content %}
     <div class="container event_main_bg">
         <h1 class="my-3">Edit your details</h1>
-            <form class="my-3" action="" method="post">{% csrf_token %}
+            <form class="my-3" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
                 {{ form|crispy }}
                 <input type="submit" value="Update" />
             </form>

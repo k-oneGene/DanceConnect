@@ -1,3 +1,14 @@
+/*=====================*/
+/* Crispy form setting */
+/*=====================*/
+.asteriskField {
+    display: none;
+}
+
+/*====================*/
+/* Main Body          */
+/*====================*/
+
 body {
     font: 14px Montserrat, sans-serif;
     /*font: 14px Roboto, sans-serif;*/

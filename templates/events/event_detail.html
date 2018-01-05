@@ -15,12 +15,15 @@
 
                 <div class ="event eventDetail">
                     <div class="row">
+                        {% if event.image %}
+                            <img class="title_img rounded img-fluid mx-auto " src="{{ event.image.url }}">
+                        {% else %}
                         {% with title_url="web_res/event_list/" event_id=event.id|slugify %}
                             {% with title_url_img=title_url|add:event_id|add:".jpg"%}
                                 <img class="title_img rounded mx-auto " src="{% static title_url_img %}">
-{#                                <img class="title_img rounded mx-auto " src="{% static "web_res/event_list/" %}/{{ event.id }}.jpg">#}
                             {% endwith %}
                         {% endwith %}
+                        {% endif %}
                     </div>
                     <div class="row ">
                         <h1> {{ event.name }} </h1>

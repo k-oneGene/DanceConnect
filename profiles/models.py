@@ -1,12 +1,27 @@
 from django.db import models
 from django.conf import settings
 from django.db.models import Q
+from django.core.files.storage import FileSystemStorage
+import os
 
 from events.models import Category
 
-# Create your models here.
-
 User = settings.AUTH_USER_MODEL
+
+
+def profile_name_path(instance, filename):
+    path = "profile_list"
+    name, file_extension = os.path.splitext(filename)
+    new_filename = str(instance.id) + file_extension
+    return os.path.join(path, new_filename)
+
+
+class OverwriteStorage(FileSystemStorage):
+    def get_available_name(self, name, max_length=None):
+        # If the filename already exists, remove it as if it was a true file system
+        if self.exists(name):
+            os.remove(os.path.join(settings.MEDIA_ROOT, name))
+        return name
 
 
 class ProfileManagerQuerySet(models.query.QuerySet):
@@ -17,6 +32,7 @@ class ProfileManagerQuerySet(models.query.QuerySet):
             Q(categories__name__icontains=query)
         ).distinct()
         # return self.filter(user__username__contains=query)
+
 
 class ProfileManager(models.Manager):
     def get_queryset(self):
@@ -35,6 +51,7 @@ class Profile(models.Model):
 
     categories = models.ManyToManyField(Category, blank=True)
     bio = models.TextField()
+    image = models.ImageField(upload_to=profile_name_path, storage=OverwriteStorage(), blank=True, null=True)
 
     teacher = models.BooleanField()
 
