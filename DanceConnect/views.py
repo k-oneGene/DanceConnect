@@ -16,6 +16,7 @@ class HomeView(TemplateView):
         context['events_list'] = Event.objects.filter(type__exact='event').order_by('-start')[0:4]
         context['profiles_list'] = Profile.objects.order_by('-user__date_joined')[0:4]
         context['festivals_list'] = Event.objects.filter(type__exact='festival').order_by('-start')[0:4]
+        context['teachers_list'] = Profile.objects.filter(teacher=True).order_by('-user__date_joined')[0:4]
         return context
 
 

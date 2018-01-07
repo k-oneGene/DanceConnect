@@ -31,11 +31,6 @@
     <div class="col-sm-12 text-left">
         <a href="{% url 'profiles:detail' pk=profile.id %}" class="">Detail</a>
     </div>
-    {% if user.is_authenticated and profile.user_id == request.user.profile.user_id %}
-        <div class="col-sm-12 text-left">
-            <a href="{% url 'profiles:update'%}" class="">Update</a>
-        </div>
-    {% endif %}
 </div>
 <div class="row ">
     <div class="col-sm-12">

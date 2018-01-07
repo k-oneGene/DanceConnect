@@ -49,13 +49,15 @@ class Profile(models.Model):
     gender = models.CharField(max_length=40)
     address = models.CharField(max_length=120)
 
-    categories = models.ManyToManyField(Category, blank=True)
+    categories = models.ManyToManyField(Category, blank=True, related_name='categories')
     bio = models.TextField()
-    image = models.ImageField(upload_to=profile_name_path, storage=OverwriteStorage(), blank=True, null=True)
+    image = models.ImageField(upload_to='profile_list', blank=True, null=True)
 
+    # For teaching
     teacher = models.BooleanField()
+    teacher_categories = models.ManyToManyField(Category, blank=True, related_name='teaching')
 
-    objects = ProfileManager() # adding to Model.objects.all()
+    objects = ProfileManager()
 
     def __str__(self):
         return self.user.username
@@ -66,3 +68,5 @@ class Profile(models.Model):
         #     all_cat += category.name + ' '
         all_cat = ', '.join([category.name for category in self.categories.all()])
         return all_cat
+
+

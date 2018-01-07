@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     # 'debug_toolbar', # debug-toolbar
     'crispy_forms',
+    'django_cleanup',
 
     'profiles',
     'events',

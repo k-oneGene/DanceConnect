@@ -40,6 +40,6 @@ class CategoryListInfoListView(DetailView):
         context = super(CategoryListInfoListView, self).get_context_data(**kwargs)
         category = self.get_object()
         context['events_list'] = Event.objects.filter(categories=category).order_by('-start')
-        context['profiles_list'] = Profile.objects.filter(categories=category)
+        context['profiles_list'] = Profile.objects.filter(teacher=True,teacher_categories=category)
         return context
 
