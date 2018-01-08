@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head_title %} {{ block.super }} {{ user.username }} {% endblock %}
+
+<!-- Navbar -->
+{% block navbar %}{% include 'snippets/nav.html' %}{% endblock %}
+
+
+{% block content %}
+
+    <div class="container-fluid event_main_bg">
+        <h1 class="text-center"> Welcome back <strong>{{ user.username }}</strong></h1>
+    </div>
+
+{#    <div class="container-fluid event_main_bg">#}
+{#        <h1 class="text-center"> Recommended events for you </h1>#}
+{#        <div class="row">#}
+{#        {% for event in object_list %}#}
+{#            <div class="col-lg-4 col-md-6 col-sm-12">#}
+{#                {% include 'events/snippets/event_box_full.html' %}#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#        </div>#}
+{#    </div>#}
+
+    <div class="container-fluid event_main_bg_2">
+        <h1 class="text-center"> Events you're going to </h1>
+        <div class="row">
+        {% for event in events_going %}
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                {% include 'events/snippets/event_box_full.html' %}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+    <div class="container-fluid event_main_bg">
+        <h1 class="text-center"> Your past events </h1>
+        <div class="row">
+        {% for event in past_events %}
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                {% include 'events/snippets/event_box_full.html' %}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock %}
+
+</body>
+</html>

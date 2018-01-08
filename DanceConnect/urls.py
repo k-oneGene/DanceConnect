@@ -17,7 +17,10 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 
 
-from .views import HomeView
+from .views import (
+    HomeView,
+    MyHomeListView,
+)
 
 # from .settings import DEBUG
 
@@ -29,6 +32,8 @@ urlpatterns = [
     path('events/', include('events.urls', namespace='events')),
     path('profiles/', include('profiles.urls', namespace='profiles')),
     path('search/', include('search.urls', namespace='search')),
+    path('home/', MyHomeListView.as_view(), name='my_home'),
+
 
     # path('profiles/', include('django.contrib.auth.urls')), # TODO: I remember fixing this issue before with another url. Maybe It was different issue?
 

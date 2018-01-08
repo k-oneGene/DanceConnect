@@ -5,7 +5,8 @@ from .views import (
     EventListView,
     EventDetailView,
     CategoryListView,
-    CategoryListInfoListView
+    CategoryListInfoListView,
+    EventGoingToggle
 )
 
 app_name = EventsConfig.name
@@ -15,4 +16,6 @@ urlpatterns = [
     path('<int:pk>/', EventDetailView.as_view(), name="detail"),
     path('category/', CategoryListView.as_view(), name="category"),
     path('category/<slug:slug>/', CategoryListInfoListView.as_view(), name="category-list-info"),
+
+    path('going/', EventGoingToggle.as_view(), name='going'),
 ]

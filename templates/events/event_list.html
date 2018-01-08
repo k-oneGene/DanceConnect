@@ -13,18 +13,13 @@
     <section>
         <div class="container-fluid event_main_bg">
             <h1 class="text-center"> Latest events happening around you! </h1>
-
             <div class="row">
             {% for event in object_list %}
-
                 <div class="col-lg-4 col-md-6 col-sm-12">
-
                     {% include 'events/snippets/event_box_full.html' %}
-
                 </div>
             {% endfor %}
             </div>
-
         </div>
     </section>
 

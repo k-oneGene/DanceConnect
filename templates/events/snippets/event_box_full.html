@@ -31,7 +31,14 @@
     <hr>
     <div class="row">
         <div class="col-sm-12 text-left">
-            <a href="{% url 'events:detail' pk=event.id %}" class="">Detail</a>
+            <a href="{% url 'events:detail' pk=event.id %}" class="btn btn-sm btn-outline-info">Details</a>
+            {% if user.is_authenticated %}
+                {% if event in user.profile.events.all %}
+                    {% include 'events/snippets/going_toggle_form.html' with eventID=event.id is_going=True %}
+                {% else %}
+                    {% include 'events/snippets/going_toggle_form.html' with eventID=event.id is_going=False %}
+                {% endif %}
+            {% endif %}
         </div>
     </div>
     <div class="row ">

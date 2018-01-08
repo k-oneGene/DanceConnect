@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
 import os
 
-from events.models import Category
+from events.models import Category, Event
 
 User = settings.AUTH_USER_MODEL
 
@@ -41,6 +41,17 @@ class ProfileManager(models.Manager):
     def search(self, query): #Profile.objects.search()
         return self.get_queryset().search(query)
 
+    def toggle_event(self, requested_user, event_to_toggle):
+        event_ = Event.objects.get(id=event_to_toggle)
+        user = requested_user
+        is_going = False
+        if user in event_.profiles.all():
+            event_.profiles.remove(user)
+        else:
+            event_.profiles.add(user)
+            is_going = True
+        return event_, is_going
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -56,6 +67,8 @@ class Profile(models.Model):
     # For teaching
     teacher = models.BooleanField()
     teacher_categories = models.ManyToManyField(Category, blank=True, related_name='teaching')
+
+    events = models.ManyToManyField(Event, blank=True, related_name='profiles')
 
     objects = ProfileManager()
 

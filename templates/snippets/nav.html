@@ -13,7 +13,9 @@
                 <li><a href='{% url 'search:home' %}'>Search</a></li>
                 {% if user.is_authenticated %}
                         {% if user.profile.id %}
+                            <li><a href="{% url 'my_home' %}">Home</a></li>
                             <li><a href="{% url 'profiles:detail' pk=user.profile.id %}">My Profile</a></li>
+
                         {% endif %}
                     <li><a href="{% url 'profiles:logout' %}">Logout</a></li>
                 {% else %}

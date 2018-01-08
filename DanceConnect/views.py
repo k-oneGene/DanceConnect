@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
+
+import pendulum
 
 from events.models import Event
 from profiles.models import Profile
@@ -20,13 +22,22 @@ class HomeView(TemplateView):
         return context
 
 
-"""
-    # get_query expects queryset to be returned not model. (Different to what i see on 2:43:39)
-    def get_queryset(self, **kwargs):
-        print("hi")
-        print(self.kwargs.get('pk'))
-        obj = get_object_or_404(Event, id=self.kwargs.get('pk'))
-        print(type(obj))
-        return obj
-        # return Event.objects.filter(id)
-    """
+class MyHomeListView(ListView):
+    model = Profile
+    template_name = 'myhome.html'
+
+    def get_queryset(self):
+        return self.request.user.profile.events.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(MyHomeListView, self).get_context_data(**kwargs)
+
+        # todo: START WITH FINISHED THESE AND LINKING TO MY TEMPLATE!
+
+        my_events_all = context['object_list']
+        now = pendulum.now()
+
+        # context['recommended_events']
+        context['events_going'] = my_events_all.filter(end__gte=now).order_by('start')
+        context['past_events'] = my_events_all.filter(end__lt=now).order_by('-start')
+        return context

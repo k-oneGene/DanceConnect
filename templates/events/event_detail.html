@@ -43,6 +43,11 @@
                     </div>
                     <hr>
                     <div class="row">
+                        {% if user.is_authenticated %}
+                            {% include 'events/snippets/going_toggle_form.html' with eventID=event.id is_going=is_going%}
+                        {% endif %}
+                    </div>
+                    <div class="row">
                         <pre> {{ event.description }}</pre>
                     </div>
                 </div>

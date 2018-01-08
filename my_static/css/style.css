@@ -402,3 +402,12 @@ pre {
 .nav-search {
     /*font-weight: bold;*/
 }
+
+
+/*       */
+/* Going */
+/*       */
+
+.going_form {
+    display: inline-block; //Or display: inline;
+}

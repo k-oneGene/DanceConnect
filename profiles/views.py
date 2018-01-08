@@ -12,7 +12,9 @@ from .forms import ProfileForm
 
 
 from django.http import HttpResponse, request
-
+from django.shortcuts import render
+from django.contrib import messages
+from django.template import Template, Context
 
 # Create your views here.
 
@@ -73,7 +75,35 @@ class ProfileDetailView(DetailView):
 
 
 def login_test_view(request):
-    user = authenticate(username='test20', password='qwerty123')
-    print(user)
-    login(request, user)
-    return HttpResponse('success')
+    # user = authenticate(username='test20', password='qwerty123')
+    # print(user)
+    # login(request, user)
+    my_html = """
+    <html>
+        <body>
+            <h1 class='text-center'>Messages testing</h1>
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %} 
+        </body>
+    </html>
+    """
+    messages.error(request, 'Please correct the error below.')
+    messages.add_message(request, messages.INFO, 'Hello world.')
+
+    messages.debug(request, '%s SQL statements were executed.' % 55)
+    messages.info(request, 'Three credits remain in your account.')
+    messages.success(request, 'Profile details updated.')
+    messages.warning(request, 'Your account expires in three days.')
+    messages.error(request, 'Document deleted.')
+
+    context = Context({'message': messages})
+
+    # return render(request, template_name='profiles/x_testing.html', context={})
+
+    # print(Template(my_html).render(context=Context({'hi':'hi'})))
+    # return HttpResponse(Template(my_html).render(context=Context({'hi':'hi'})))
