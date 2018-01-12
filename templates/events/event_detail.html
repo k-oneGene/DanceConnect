@@ -46,6 +46,12 @@
                         {% if user.is_authenticated %}
                             {% include 'events/snippets/going_toggle_form.html' with eventID=event.id is_going=is_going%}
                         {% endif %}
+                        {% if user.is_authenticated and user.id == event.creator.id %}
+                            <div class="">
+                                <a href="{% url 'events:edit' pk=event.pk %}"><button class="btn btn-outline-dark btn-sm mx-2">Edit</button></a>
+                                <a href="{% url 'events:delete' pk=event.pk %}"><button class="btn btn-outline-danger btn-sm ">Delete</button></a>
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="row">
                         <pre> {{ event.description }}</pre>

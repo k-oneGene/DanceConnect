@@ -5,7 +5,7 @@
 {% block head_title %} {{ block.super }} {{ user.username }} {% endblock %}
 
 <!-- Navbar -->
-{% block navbar %}{% include 'snippets/nav.html' %}{% endblock %}
+{% block navbar %}{% include 'snippets/nav.html' %} <br> {% include 'snippets/nav_myhome.html' %}{% endblock %}
 
 
 {% block content %}
@@ -34,6 +34,9 @@
             </div>
         {% endfor %}
         </div>
+        <div class="row justify-content-center">
+            <a href='{% url 'profiles:my_future' %}'>More events</a>
+        </div>
     </div>
 
     <div class="container-fluid event_main_bg">
@@ -44,6 +47,9 @@
                 {% include 'events/snippets/event_box_full.html' %}
             </div>
         {% endfor %}
+        </div>
+        <div class="row justify-content-center">
+            <a href='{% url 'profiles:my_past' %}'>See all past events</a>
         </div>
     </div>
 

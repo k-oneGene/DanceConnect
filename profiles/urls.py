@@ -11,6 +11,8 @@ from .views import (
     ProfileUpdateView,
     SignUpCreateView,
     SignUpProfileCreateView,
+    MyPastEventsListView,
+    MyFutureEventsListView,
     login_test_view
 )
 
@@ -25,6 +27,9 @@ urlpatterns = [
     path('signup/', SignUpCreateView.as_view(), name='signup'),
     path('signup-profile/', SignUpProfileCreateView.as_view(), name='profile'),
     path('logintest/', login_test_view),
+
+    path('past_events/', MyPastEventsListView.as_view(), name='my_past'),
+    path('future_events/', MyFutureEventsListView.as_view(), name='my_future'),
 
 ]
 

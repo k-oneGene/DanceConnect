@@ -1,0 +1,85 @@
+{% extends 'registration/base_registration.html' %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block title %}{{ block.super }}Create Event{% endblock %}
+
+
+{% block content_reg %}
+<div class="container">
+    <h2>Create Event</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field.errors }}
+            {{ hidden_field }}
+
+        {% endfor %}
+
+            <div class="justify-content-center my-3 eventDetail rounded">
+                <div class="form-group">
+                    {{ form.name.label_tag }}
+                    {{ form.name.errors }}
+                    {% render_field form.name class="form-control" %}
+                </div>
+                <div class="form-row">
+                    <div class="form-group mx-sm-2">
+                        {{ form.start.label_tag }}
+                        {{ form.start.errors }}
+                        {% render_field form.start class="form-control" %}
+                    </div>
+                    <div class="form-group mx-sm-2">
+                        {{ form.end.label_tag }}
+                        {{ form.end.errors }}
+                        {% render_field form.end class="form-control" %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form.location.label_tag }}
+                    {{ form.location.errors }}
+                    {% render_field form.location class="form-control" %}
+                </div>
+                <div class="form-check mx-sm-3">
+                    {% for category in form.categories %}
+                        <label class="btn btn-info">
+                            <input type="checkbox" name="categories" id="{{ category.id_for_label }}" value="{{ category.data.value }}" {% if category.data.value|slugify in categories_q %} checked {% endif %}>
+                            {{ category.choice_label }}
+                        </label>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    {{ form.type.label_tag }}
+                    {{ form.type.errors }}
+                    {% render_field form.type class="form-control" %}
+                </div>
+                <div class="form-group">
+                    {{ form.description.label_tag }}
+                    {{ form.description.errors }}
+                    {% render_field form.description class="form-control" %}
+                </div>
+                <div class="form-group">
+                    {{ form.image.label_tag }}
+                    {{ form.image.errors }}
+                    {% render_field form.image class="" %}
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-warning">Create</button>
+                    <a href="{% url 'search:events-advance' %}" class="ml-2">Clear</a>
+                </div>
+            </div>
+    </form>
+</div>
+
+
+{#    <form method="post" enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{#        {{ form|crispy }}#}
+{#        <button type="submit">Finish</button>#}
+{#    </form>#}
+
+
+{% endblock %}

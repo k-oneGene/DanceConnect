@@ -8,26 +8,23 @@
 
     <div class="container-fluid event_main_bg">
 
-        <h1 class="text-center"> Search for events </h1>
-        <div class="row justify-content-center">
-            <a href="#">Advance Search</a>
-        </div>
-        <div class="row justify-content-center my-3">
-            <form class="form-inline" method="GET" action="">
-                <div class="form-group mx-sm-3">
-                    <input type="text" placeholder="Search..." name="q" class="form-control" value="{{ request.GET.q }}">
-                </div>
-                <button type="submit" class="btn btn-default">Search</button>
-            </form>
-        </div>
+        <h1 class="text-center"> Search for <a href="{% url 'search:events' %}">events</a>, <a href="{% url 'search:festivals' %}">festivals</a>, <a href="{% url 'search:profiles' %}">users</a> or teachers </h1>
+{#        <div class="row justify-content-center">#}
+{#            <a href="#">Advance Search</a>#}
+{#        </div>#}
+{#        <div class="row justify-content-center my-3">#}
+{#            <form class="form-inline" method="GET" action="">#}
+{#                <div class="form-group mx-sm-3">#}
+{#                    <input type="text" placeholder="Search..." name="q" class="form-control" value="{{ request.GET.q }}">#}
+{#                </div>#}
+{#                <button type="submit" class="btn btn-default">Search</button>#}
+{#            </form>#}
+{#        </div>#}
 
         <div class="row">
             {% for event in object_list %}
-
                 <div class="col-lg-4 col-md-6 col-sm-12">
-
                     {% include 'events/snippets/event_box_full.html' %}
-
                 </div>
             {% endfor %}
         </div>

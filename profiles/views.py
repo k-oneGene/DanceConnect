@@ -4,10 +4,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 from django.contrib.auth import authenticate, login
 
 from .models import Profile
+from events.models import Event
 from .forms import ProfileForm
 
 
@@ -15,6 +18,8 @@ from django.http import HttpResponse, request
 from django.shortcuts import render
 from django.contrib import messages
 from django.template import Template, Context
+
+import pendulum
 
 # Create your views here.
 
@@ -72,6 +77,26 @@ class ProfileUpdateView(UpdateView):
 
 class ProfileDetailView(DetailView):
     model = Profile
+
+
+class MyPastEventsListView(ListView):
+    model = Event
+    template_name = 'profiles/my_past_events_list.html'
+    paginate_by = 9
+
+    def get_queryset(self):
+        now = pendulum.now()
+        return self.request.user.profile.events.all().filter(end__lt=now).order_by('-start')
+
+
+class MyFutureEventsListView(ListView):
+    model = Event
+    template_name = 'profiles/my_future_events_list.html'
+    paginate_by = 9
+
+    def get_queryset(self):
+        now = pendulum.now()
+        return self.request.user.profile.events.all().filter(end__gte=now).order_by('start')
 
 
 def login_test_view(request):

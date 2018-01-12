@@ -1,3 +1,5 @@
+{% load static %}
+
 <nav class="navbar navbar-light navbar-expand-md">
     <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">DanceConnect</a>
@@ -6,22 +8,36 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav ml-auto">
-                <li><a href='{% url 'search:festivals' %}'>Festivals </a></li>
+                <li><a href='{% url 'search:festivals' %}'>Festivals</a></li>
                 <li><a href='{% url 'events:category' %}'>Dances</a></li>
                 <li><a href='{% url 'events:list' %}'>Events</a></li>
                 <li><a href='{% url 'profiles:list' %}'>Users</a></li>
                 <li><a href='{% url 'search:home' %}'>Search</a></li>
-                {% if user.is_authenticated %}
-                        {% if user.profile.id %}
-                            <li><a href="{% url 'my_home' %}">Home</a></li>
-                            <li><a href="{% url 'profiles:detail' pk=user.profile.id %}">My Profile</a></li>
+            </ul>
 
-                        {% endif %}
-                    <li><a href="{% url 'profiles:logout' %}">Logout</a></li>
-                {% else %}
-                    <li><a href="{% url 'profiles:login' %}">Login</a></li>
+            {% if user.is_authenticated and user.profile.id %}
+                <a class="mr-2" href="{% url 'my_home' %}">
+                    {% if user.profile.image %}
+                        <img class="rounded-circle" src="{{ user.profile.image.url }}" width="35" height="35">
+                    {% else %}
+                        {% with title_url="web_res/profile_list/" event_id=user.profile.id|slugify %}
+                            {% with title_url_img=title_url|add:event_id|add:".jpg"%}
+                                <img class="rounded-circle" src="{% static title_url_img %}" width="30" height="30">
+                            {% endwith %}
+                        {% endwith %}
+                    {% endif %}
+                </a>
+            {% endif %}
+
+            <ul class="navbar-nav mr-auto">
+            {% if user.is_authenticated %}
+                {% if user.profile.id %}
+                    <li><a href="{% url 'my_home' %}">{{ user.username }}</a></li>
                 {% endif %}
-
+                <li><a href="{% url 'profiles:logout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'profiles:login' %}">Login</a></li>
+            {% endif %}
             </ul>
         </div>
     </div>

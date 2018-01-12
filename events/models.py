@@ -55,7 +55,7 @@ class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
     description_short = models.TextField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to=category_name_path, storage=OverwriteStorage(), blank=True, null=True)
+    image = models.ImageField(upload_to=category_name_path, blank=True, null=True)
     slug = models.SlugField(blank=True)
 
     def __str__(self):
@@ -71,7 +71,7 @@ class Event(models.Model):
     description = models.TextField(null=True, blank=True)
     start = models.DateTimeField()
     end = models.DateTimeField() # todo: need validation to check start/end is smaller/bigger
-    image = models.ImageField(upload_to=event_name_path, storage=OverwriteStorage(), blank=True, null=True)
+    image = models.ImageField(upload_to=event_name_path, blank=True, null=True)
 
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

@@ -38,6 +38,6 @@ class MyHomeListView(ListView):
         now = pendulum.now()
 
         # context['recommended_events']
-        context['events_going'] = my_events_all.filter(end__gte=now).order_by('start')
-        context['past_events'] = my_events_all.filter(end__lt=now).order_by('-start')
+        context['events_going'] = my_events_all.filter(end__gte=now).order_by('start')[0:3]
+        context['past_events'] = my_events_all.filter(end__lt=now).order_by('-start')[0:3]
         return context

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head_title %} {{ block.super }} Event - {{ event.name }} {% endblock %}
+
+<!-- Navbar -->
+{% block navbar %}{% include 'snippets/nav.html' %}{% endblock %}
+
+
+{% block content %}
+
+
+        <div class="container event_main_bg my-5">
+            <div class="row mx-0">
+                <h3>Are you sure you want to delete?</h3>
+            </div>
+            <div class="row">
+                {% include 'events/snippets/event_box_mini.html' %}
+            </div>
+            <div class="row">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-outline-danger btn-sm mx-1" value="Delete" name="confirm_delete" />
+                </form>
+                <a href="{% url 'events:detail' pk=event.pk %}"><button class="btn btn-outline-secondary btn-sm ">Back</button></a>
+            </div>
+        </div>
+
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock %}
+
+</body>
+</html>

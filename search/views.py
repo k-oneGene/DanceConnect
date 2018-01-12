@@ -13,11 +13,17 @@ from .forms import AdvanceSearchForm
 class SearchHomeView(TemplateView):
     template_name = 'search/search_home.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(SearchHomeView, self).get_context_data(**kwargs)
+        query = self.request.GET.get('q')
+        qs = Event.objects.all().order_by('-start')
+
+
 
 class SearchEventsListview(ListView):
     model = Event
     template_name = 'search/searchevents_list.html'
-    paginate_by = 3
+    paginate_by = 9
 
     def get_context_data(self, *args, **kwargs):
         context = super(SearchEventsListview, self).get_context_data(*args, **kwargs)
@@ -48,7 +54,7 @@ class SearchEventsListview(ListView):
 class AdvanceSearchEventsListView(ListView):
     model = Event
     template_name = 'search/advance_searchevents_list.html'
-    paginate_by = 3
+    paginate_by = 9
 
     def get_context_data(self, *args, **kwargs):
         context = super(AdvanceSearchEventsListView, self).get_context_data(*args, **kwargs)
@@ -96,7 +102,7 @@ class AdvanceSearchEventsListView(ListView):
 class SearchFestivalsListView(ListView):
     model = Event
     template_name = 'search/searchfestivals_list.html'
-    paginate_by = 2
+    paginate_by = 9
 
     def get_context_data(self, *args, **kwargs):
         context = super(SearchFestivalsListView, self).get_context_data(*args, **kwargs)
@@ -127,7 +133,7 @@ class SearchFestivalsListView(ListView):
 class AdvanceSearchFestivalsListView(ListView):
     model = Event
     template_name = 'search/advance_searchfestivals_list.html'
-    paginate_by = 3
+    paginate_by = 9
 
     def get_context_data(self, *args, **kwargs):
         context = super(AdvanceSearchFestivalsListView, self).get_context_data(*args, **kwargs)
@@ -175,7 +181,7 @@ class AdvanceSearchFestivalsListView(ListView):
 class SearchProfilesListview(ListView):
     model = Profile
     template_name = 'search/searchprofiles_list.html'
-    paginate_by = 3
+    paginate_by = 9
 
     def get_context_data(self, *args, **kwargs):
         context = super(SearchProfilesListview, self).get_context_data(*args, **kwargs)
