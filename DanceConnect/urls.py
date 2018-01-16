@@ -27,6 +27,7 @@ from .views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('oauth/', include('social_django.urls', namespace='social')),
 
     path('', HomeView.as_view(), name="home"),
     path('events/', include('events.urls', namespace='events')),

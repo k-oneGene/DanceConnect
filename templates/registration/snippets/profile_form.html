@@ -1,0 +1,71 @@
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+
+{% for hidden in form.hidden_fields %}
+    {{ hidden }}
+{% endfor %}
+
+{% for hidden_field in form.hidden_fields %}
+    {{ hidden_field.errors }}
+    {{ hidden_field }}
+
+{% endfor %}
+
+<div class="form-row">
+    <div class="form-group">
+        {{ form.date_of_birth.label_tag }}
+        {{ form.date_of_birth.errors }}
+        {% render_field form.date_of_birth class="form-control" %}
+    </div>
+
+    <div class="form-group mx-2">
+        {{ form.gender.label_tag }}
+        {{ form.gender.errors }}
+        {% render_field form.gender class="form-control" %}
+    </div>
+</div>
+
+<div class="form-group">
+    {{ form.address.label_tag }}
+    {{ form.address.errors }}
+    {% render_field form.address class="form-control" %}
+</div>
+
+<div class="form-group">
+    {{ form.categories.label_tag }}
+    {{ form.categories.errors }}
+    <br>
+    {% include 'registration/snippets/categories_display.html' with categories=form.categories %}
+</div>
+
+<div class="form-check">
+    {{ form.teacher.errors }}
+    {{ form.teacher.label_tag }}
+    {{ form.teacher }}
+{#    {% render_field form.teacher class="form-check-input" %}#}
+    {#    {% render_field form.teacher.label_tag class="form-check-label" %}#}
+
+
+</div>
+
+<div class="form-group">
+    {{ form.teacher_categories.label_tag }}
+    {{ form.teacher_categories.errors }}
+    <br>
+    {% include 'registration/snippets/categories_display.html' with categories=form.teacher_categories %}
+</div>
+
+
+<div class="form-group">
+    {{ form.bio.label_tag }}
+    {{ form.bio.errors }}
+    {% render_field form.bio class="form-control" %}
+</div>
+
+<div class="form-group">
+    {{ form.image.label_tag }}
+    {{ form.image.errors }}
+    {% render_field form.image class="" %}
+</div>
+

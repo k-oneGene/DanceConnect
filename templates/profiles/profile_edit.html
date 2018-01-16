@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'registration/base_registration.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 
@@ -11,10 +11,12 @@
 {% block content %}
     <div class="container event_main_bg">
         <h1 class="my-3">Edit your details</h1>
+        <div class="eventDetail rounded">
             <form class="my-3" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
-                {{ form|crispy }}
-                <input type="submit" value="Update" />
+                {% include 'registration/snippets/profile_form.html' %}
+                <input class="btn btn-warning" type="submit" value="Update" />
             </form>
+        </div>
     </div>
 {% endblock %}
 

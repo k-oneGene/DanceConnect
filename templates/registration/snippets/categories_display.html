@@ -1,0 +1,7 @@
+{% for category in categories %}
+    <label class="btn btn-info">
+        <input type="checkbox" name="categories" id="{{ category.id_for_label }}" value="{{ category.data.value }}" {% if category.data.value|slugify in categories_q %} checked {% endif %}>
+        {#                        {{ category.tag }}#}
+        {{ category.choice_label }}
+    </label>
+{% endfor %}

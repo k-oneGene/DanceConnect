@@ -5,15 +5,19 @@
 
 
 {% block content_reg %}
-    <h2>Login</h2>
-    <form class="" method="post">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit">Login</button>
-    </form>
-    <a href="{% url 'profiles:signup' %}">Sign up</a>
-    <br>
-    <a href="{% url 'profiles:password_reset' %}">Forgot password</a>
-    <br>
-    <a href="{% url 'profiles:profile' %}">=-testing-=</a>
+    <div class="loginBox">
+        <h2>Login</h2>
+        <form class="" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit">Login</button>
+        </form>
+        <br>
+        <div class="text-center">
+            <a href="{% url 'social:begin' 'facebook' %}"><i class="fa fa-facebook-official fa-lg"></i> Login with facebook</a>
+            <hr>
+            Don't have an account? <a href="{% url 'profiles:signup' %}">Sign up</a><br>
+            <a href="{% url 'profiles:password_reset' %}">Forgot password?</a>
+        </div>
+    </div>
 {% endblock %}

@@ -43,10 +43,18 @@
                     </div>
                     <hr>
                     <div class="row">
+{#                        {% if user.is_authenticated and user.profile %}#}
+{#                            {% include 'events/snippets/going_toggle_form.html' with eventID=event.id is_going=is_going%}#}
+
                         {% if user.is_authenticated %}
-                            {% include 'events/snippets/going_toggle_form.html' with eventID=event.id is_going=is_going%}
+                            {% if event in user.profile.events.all %}
+                                {% include 'events/snippets/going_toggle_form.html' with eventID=event.id is_going=True %}
+                            {% else %}
+                                {% include 'events/snippets/going_toggle_form.html' with eventID=event.id is_going=False %}
+                            {% endif %}
+
                         {% endif %}
-                        {% if user.is_authenticated and user.id == event.creator.id %}
+                        {% if user.is_authenticated and user.id == event.creator.id and user.profile %}
                             <div class="">
                                 <a href="{% url 'events:edit' pk=event.pk %}"><button class="btn btn-outline-dark btn-sm mx-2">Edit</button></a>
                                 <a href="{% url 'events:delete' pk=event.pk %}"><button class="btn btn-outline-danger btn-sm ">Delete</button></a>

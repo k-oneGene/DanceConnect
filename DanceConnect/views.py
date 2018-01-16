@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 
 from django.views.generic import TemplateView, ListView
+from django.shortcuts import redirect, reverse
+from django.core.exceptions import ObjectDoesNotExist
 
 import pendulum
 
@@ -23,8 +25,15 @@ class HomeView(TemplateView):
 
 
 class MyHomeListView(ListView):
-    model = Profile
+    # model = Profile
     template_name = 'myhome.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            self.request.user.profile
+            return super(MyHomeListView, self).dispatch(request, *args, **kwargs)
+        except ObjectDoesNotExist:
+            return redirect(reverse('profiles:profile'))
 
     def get_queryset(self):
         return self.request.user.profile.events.all()

@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import CheckboxSelectMultiple, Select
+from django.forms import CheckboxSelectMultiple, Select, SelectDateWidget, DateInput
 
 from .models import Profile
 
@@ -20,7 +20,8 @@ class ProfileForm(forms.ModelForm):
         widgets = {
             'categories': CheckboxSelectMultiple(),
             'teacher_categories': CheckboxSelectMultiple(),
-            'gender': Select(choices=(('Male', 'Male'), ('Female', 'Female')))
+            'gender': Select(choices=(('Male', 'Male'), ('Female', 'Female'))),
+            'date_of_birth': DateInput(attrs={'type': 'date'})
         }
         labels = {
             'teacher': 'Are you a dance teacher?',

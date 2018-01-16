@@ -33,6 +33,8 @@
             {% if user.is_authenticated %}
                 {% if user.profile.id %}
                     <li><a href="{% url 'my_home' %}">{{ user.username }}</a></li>
+                {% else %}
+                    <li><a href="{% url 'profiles:profile' %}"><strong>Add Info</strong></a></li>
                 {% endif %}
                 <li><a href="{% url 'profiles:logout' %}">Logout</a></li>
             {% else %}

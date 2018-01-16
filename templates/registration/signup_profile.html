@@ -6,9 +6,9 @@
 
 {% block content_reg %}
     <h2>About you</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit">Finish</button>
-    </form>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include 'registration/snippets/profile_form.html' %}
+            <button class="btn btn-warning" type="submit">Finish</button>
+        </form>
 {% endblock %}

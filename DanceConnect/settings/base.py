@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 from django.contrib.messages import constants as messages
 import os
 
+from decouple import config
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_extensions',
+    'social_django',
 
     # 'debug_toolbar', # debug-toolbar
     'crispy_forms',
@@ -63,6 +66,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+
     # 'debug_toolbar.middleware.DebugToolbarMiddleware', # debug-toolbar
 ]
 
@@ -81,6 +86,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -117,6 +125,17 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+# For social-auth-app-django,
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 
 
 # Internationalization
@@ -159,9 +178,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'my_static', 'web_res')
 
 # Login/Logout
 LOGIN_URL = '/profiles/login'
-LOGIN_REDIRECT_URL = 'home'
+LOGOUT_URL = '/profiles/logout'
+LOGIN_REDIRECT_URL = 'my_home'
 LOGOUT_REDIRECT_URL = 'profiles:login'
-
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = 'profiles:profile'
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -178,4 +198,25 @@ CSRF_COOKIE_SECURE              = False
 SECURE_HSTS_SECONDS             = None
 SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
 SECURE_FRAME_DENY               = False
+
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_by_email',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
+
+
+SOCIAL_AUTH_FACEBOOK_KEY = config('SOCIAL_AUTH_FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = config('SOCIAL_AUTH_FACEBOOK_SECRET')
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+
 
