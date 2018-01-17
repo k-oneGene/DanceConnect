@@ -1,3 +1,14 @@
+/*=====================*/
+/* Crispy form setting */
+/*=====================*/
+.asteriskField {
+    display: none;
+}
+
+/*====================*/
+/* Main Body          */
+/*====================*/
+
 body {
     font: 14px Montserrat, sans-serif;
     /*font: 14px Roboto, sans-serif;*/
@@ -6,6 +17,10 @@ body {
 
     line-height: 1.8;
     color: #f5f6f7;
+
+    /*min-height: 100vh;*/
+    /*position: relative;*/
+    /*margin: 0;*/
 }
 
 .margin {margin-bottom: 45px;}
@@ -167,13 +182,6 @@ body {
 /* FOOTER */
 /* ====== */
 
-
-/*.bg-4 {*/
-    /*background-color: #2f2f2f; !* Black Gray *!*/
-    /*color: #fff;*/
-/*}*/
-
-
 footer {
     background-color: #2f2f2f;
     color: #fff;
@@ -182,8 +190,15 @@ footer {
 
     /*height:60px;			!* Height of the footer *!*/
     /*background:#6cf;*/
+    margin-top: 35px;
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
 
+
+    /*position: absolute;*/
+    /*bottom: 0;*/
 }
+
 
 footer p {
     color: #888;
@@ -391,3 +406,41 @@ pre {
 .nav-search {
     /*font-weight: bold;*/
 }
+
+
+/*       */
+/* Going */
+/*       */
+
+.going_form {
+    display: inline-block; //Or display: inline;
+}
+
+
+
+
+
+/**************/
+/* Login      */
+/**************/
+
+.loginBox {
+    margin: 0 auto;
+    max-width: 450px;
+}
+
+
+
+
+/**************/
+/* Profiles      */
+/**************/
+
+.signupProfile {
+    margin: 0 auto;
+    max-width: 750px;
+}
+
+
+
+
