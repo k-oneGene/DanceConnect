@@ -5,6 +5,7 @@ from django.core.files.storage import FileSystemStorage
 import os
 
 from events.models import Category, Event
+from friends.models import Friend
 
 User = settings.AUTH_USER_MODEL
 
@@ -70,6 +71,8 @@ class Profile(models.Model):
 
     events = models.ManyToManyField(Event, blank=True, related_name='profiles')
 
+    # friends = models.ManyToManyField(User, through='Friendship', through_fields=('from_user', 'to_user'), related_name='friends', symmetrical=False, blank=True)
+
     objects = ProfileManager()
 
     def __str__(self):
@@ -82,4 +85,15 @@ class Profile(models.Model):
         all_cat = ', '.join([category.name for category in self.categories.all()])
         return all_cat
 
+    def get_friends(self):
+        return Friend.objects.filter((Q(from_user=self.user) | Q(to_user=self.user)) & Q(status='friend'))
+
+    def get_my_requests(self):
+        return Friend.objects.filter(Q(from_user=self.user) & Q(status='requested'))
+
+    def get_friend_requests(self):
+        return Friend.objects.filter(Q(to_user=self.user) & Q(status='requested'))
+
+    def get_blocked(self):
+        return Friend.objects.filter(Q(from_user=self.user) & Q(status='blocked'))
 

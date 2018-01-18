@@ -1,0 +1,48 @@
+{% load static %}
+
+<div class="row ">
+
+    {# Has else case because originally image wasn't in model (for older data) #}
+    {% if profile.image %}
+        <img class="title_img rounded img-fluid mx-auto " src="{{ profile.image.url }}">
+    {% else %}
+        {% with title_url="web_res/profile_list/" event_id=profile.id|slugify %}
+            {% with title_url_img=title_url|add:event_id|add:".jpg"%}
+                <img class="title_img rounded img-fluid mx-auto " src="{% static title_url_img %}">
+            {% endwith %}
+        {% endwith %}
+    {% endif %}
+</div>
+<div class="row">
+    <h1> {{ profile.user.username }} </h1>
+</div>
+<div class="row">
+    <small> {{ profile.user.first_name }} {{ profile.user.last_name }} </small>
+</div>
+<hr>
+<div class="row">
+    <i class="icon ion-ios-calendar-outline mx-3">  {{ profile.date_of_birth }}</i>
+</div>
+<div class="row">
+    <i class="ion-ios-pricetags-outline mx-3">  {{ profile.list_category }}</i>
+</div>
+<hr>
+<div class="row">
+    <div class="col-sm-12 text-left">
+        <a href="{% url 'profiles:detail' pk=profile.id %}" class="">Detail</a>
+    </div>
+</div>
+<div class="row">
+    {% if request.user.is_authenticated %}
+        <form class="going_form" method="POST" action='{% url "events:going" %}'> {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.path }}">
+            <input type="hidden" name="eventID" value="{{ eventID }}">
+            <button class="btn {% if is_going %} btn-secondary{% else %}btn-warning{% endif %}">{% if is_going %}Unfriend {% else %}Friend {% endif %}</button>
+        </form>
+    {% endif %}
+</div>
+<div class="row ">
+    <div class="col-sm-12">
+        <pre> {{ profile.bio }}</pre>
+    </div>
+</div>

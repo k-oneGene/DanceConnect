@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_extensions',
-    'social_django',
+    'social_django', # Social auth (facebook)
 
     # 'debug_toolbar', # debug-toolbar
     'crispy_forms',
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'profiles',
     'events',
     'search',
+    'friends',
 ]
 
 MIDDLEWARE = [

@@ -33,6 +33,7 @@ urlpatterns = [
     path('events/', include('events.urls', namespace='events')),
     path('profiles/', include('profiles.urls', namespace='profiles')),
     path('search/', include('search.urls', namespace='search')),
+    path('friends/', include('friends.urls', namespace='friends')),
     path('home/', MyHomeListView.as_view(), name='my_home'),
 
 

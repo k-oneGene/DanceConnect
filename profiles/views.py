@@ -24,13 +24,6 @@ import pendulum
 # Create your views here.
 
 
-class ProfileListView(ListView):
-    model = Profile
-
-    def get_queryset(self):
-        return Profile.objects.all().order_by('-user__date_joined')
-
-
 class SignUpCreateView(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('profiles:profile')
@@ -73,6 +66,13 @@ class ProfileUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('profiles:detail', kwargs={'pk': self.request.user.profile.id})
+
+
+class ProfileListView(ListView):
+    model = Profile
+
+    def get_queryset(self):
+        return Profile.objects.all().order_by('-user__date_joined')
 
 
 class ProfileDetailView(DetailView):

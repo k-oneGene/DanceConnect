@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head_title %} {{ block.super }} Events {% endblock %}
+
+<!-- Navbar -->
+{% block navbar %}{% include 'snippets/nav.html' %}{% endblock %}
+
+
+{% block content %}
+
+    <section>
+        <div class="container-fluid event_main_bg">
+            <h1 class="text-center"> Friends </h1>
+            <div class="row">
+            {{ object_list }}
+            {% for friend in object_list %}
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="event">
+                        {% include 'friends/snippets/friends_box.html' with profile=friend.to_user.profile %}
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock %}
+
+</body>
+</html>
