@@ -1,47 +1,28 @@
 {% if request.user.is_authenticated %}
+    <form class="friend_form" method="POST" action='{% url "friends:friend_logic" %}'> {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <input type="hidden" name="to_user" value="{{ profile.user.pk }}">
         {% if friend_to_me.blocked %}
-            <form class="friend_form" method="POST" action='{% url "friends:friend_logic" %}'> {% csrf_token %}
-                <input type="hidden" name="next" value="{{ request.path }}">
-                <input type="hidden" name="to_user" value="{{ profile.user.pk }}">
-                    <button name="friend_action" class="btn btn-secondary btn-sm", value="blocked">You are blocked</button>
+            <button name="friend_action" class="btn btn-secondary btn-sm", value="blocked">You are blocked</button>
         {% elif me_to_friend.status == 'requested' %}
-            <form class="friend_form" method="POST" action='{% url "friends:unrequest" %}'> {% csrf_token %}
-                <input type="hidden" name="next" value="{{ request.path }}">
-                <input type="hidden" name="to_user" value="{{ profile.user.pk }}">
-                    <button name="friend_action" class="btn btn-secondary btn-sm" value="requested">Request sent</button>
+            <button name="friend_action" class="btn btn-secondary btn-sm" value="requested">Request sent</button>
         {% elif friend_to_me.status == 'requested' %}
-            <form class="friend_form" method="POST" action='{% url "friends:accept" %}'> {% csrf_token %}
-                <input type="hidden" name="next" value="{{ request.path }}">
-                <input type="hidden" name="to_user" value="{{ profile.user.pk }}">
-                    <button name="friend_action" value="accept" class="btn btn-secondary btn-sm">Accept</button>
-                    <button name="friend_action" value="remove" class="btn btn-secondary btn-sm">Remove</button>
+            <button name="friend_action" value="accept" class="btn btn-secondary btn-sm">Accept</button>
+            <button name="friend_action" value="remove" class="btn btn-secondary btn-sm">Remove</button>
         {% elif me_to_friend.status == 'friend' %}
-            <form class="friend_form" method="POST" action='{% url "friends:unfriend" %}'> {% csrf_token %}
-                <input type="hidden" name="next" value="{{ request.path }}">
-                <input type="hidden" name="to_user" value="{{ profile.user.pk }}">
-                    <button name="friend_action" class="btn btn-secondary btn-sm" value="unfriend">Unfriend</button>
+            <button name="friend_action" class="btn btn-secondary btn-sm" value="unfriend">Unfriend</button>
         {% elif me_to_friend.blocked %}
-            <form class="friend_form" method="POST" action='{% url "friends:unblock" %}'> {% csrf_token %}
-                <input type="hidden" name="next" value="{{ request.path }}">
-                <input type="hidden" name="to_user" value="{{ profile.user.pk }}">
-                    <button name="friend_action" class="btn btn-secondary btn-sm" value="youBlocked">You Blocked => </button>
+            <button name="friend_action" class="btn btn-secondary btn-sm" value="youBlocked">You Blocked => </button>
         {% else %}
-{#            friends:add #}
-            <form class="friend_form" method="POST" action='{% url "friends:friend_logic" %}'> {% csrf_token %}
-                <input type="hidden" name="next" value="{{ request.path }}">
-                <input type="hidden" name="to_user" value="{{ profile.user.pk }}">
-                    <button name="friend_action" class="btn btn-secondary btn-sm">Add Friend</button>
+            <button name="friend_action" class="btn btn-secondary btn-sm" value="add">Add Friend</button>
         {% endif %}
-            </form>
-        <form class="friend_form" method="POST" action='{% url "friends:friend_logic" %}'> {% csrf_token %}
-            <input type="hidden" name="next" value="{{ request.path }}">
-            <input type="hidden" name="to_user" value="{{ profile.user.pk }}">
-            {% if me_to_friend.blocked %}
-                <button name="block_action" class="btn btn-secondary btn-sm" value="unblock">Unblock</button>
-            {% else %}
-                <button name="block_action" class="btn btn-secondary btn-sm" value="block">Block</button>
-            {% endif %}
-        </form>
+
+        {% if me_to_friend.blocked %}
+            <button name="block_action" class="btn btn-secondary btn-sm" value="unblock">Unblock</button>
+        {% else %}
+            <button name="block_action" class="btn btn-secondary btn-sm" value="block">Block</button>
+        {% endif %}
+    </form>
 
 {% endif %}
 

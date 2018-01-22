@@ -14,6 +14,7 @@ from .views import (
     Friend_Add,
     Friend_Unrequest,
     Friend_Accept,
+    Friend_Remove,
     Friend_Unfriend,
 
     Friend_Block,
@@ -30,15 +31,15 @@ urlpatterns = [
     path('sent_requests/', FriendsMyRequestsListView.as_view(), name="my_requests"),
     path('blocked/', FriendsBlockedListView.as_view(), name="blocked"),
 
-    path('add/', Friend_Add.as_view(), name='add'),
-    path('unrequest/', Friend_Unrequest.as_view(), name='unrequest'),
-    path('accept/', Friend_Accept.as_view(), name='accept'),
-    path('unfriend/', Friend_Unfriend.as_view(), name='unfriend'),
+    path('add/<int:pk>/', Friend_Add.as_view(), name='add'),
+    path('unrequest/<int:pk>/', Friend_Unrequest.as_view(), name='unrequest'),
+    path('accept/<int:pk>/', Friend_Accept.as_view(), name='accept'),
+    path('remove/<int:pk>/', Friend_Remove.as_view(), name='remove'),
+    path('unfriend/<int:pk>/', Friend_Unfriend.as_view(), name='unfriend'),
 
     path('flogic/', Friend_Logic.as_view(), name='friend_logic'),
-    path('block/', Friend_Block.as_view(), name='block'),
-    path('unblock/', Friend_Unblock.as_view(), name='unblock'),
-
+    path('block/<int:pk>/', Friend_Block.as_view(), name='block'),
+    path('unblock/<int:pk>/', Friend_Unblock.as_view(), name='unblock'),
 
 ]
 

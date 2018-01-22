@@ -30,16 +30,15 @@ class FriendManager(models.Manager):
         if message is None:
             message = ''
 
-        friendship, created = Friend.friend_add(from_user=from_user, to_user=to_user)
+        Friend.friend_add(from_user=from_user, to_user=to_user)
 
-        if created is False:
-            raise AlreadyExistsError("Friendship already requested")
+        # if created is False:
+        #     raise AlreadyExistsError("Friendship already requested")
 
         # if message:
         #     request.message = message
         #     request.save()
 
-        return friendship, created
 
     def unrequest_friend(self, from_user, to_user):
         Friend.friend_unrequest(from_user=from_user, to_user=to_user)
@@ -78,11 +77,17 @@ class Friend(models.Model):
     """
     @staticmethod
     def friend_add(from_user, to_user, status='requested'):
-        friendship, created = Friend.objects.get_or_create(from_user=from_user, to_user=to_user)
-        if created:
-            friendship.status = status
-            friendship.save()
-        return friendship, created
+        # Check if I am blocked first
+        try:
+            friendship_rev = Friend.objects.get(from_user=to_user, to_user=from_user)
+        except Friend.DoesNotExist:
+            raise Http404('Person has not blocked.')
+
+        if not friendship_rev.blocked:
+            friendship, created = Friend.objects.get_or_create(from_user=from_user, to_user=to_user)
+            if created:
+                friendship.status = status
+                friendship.save()
 
 
     @staticmethod
@@ -152,7 +157,10 @@ class Friend(models.Model):
         try:
             friendship = Friend.objects.get(Q(from_user=from_user) & Q(to_user=to_user))
             if friendship.blocked:
-                friendship.blocked = False
-                friendship.save()
+                if friendship.status == '':
+                    friendship.delete()
+                else:
+                    friendship.blocked = False
+                    friendship.save()
         except Friend.DoesNotExist:
             raise Http404('Can not find such friend to unblock.')
