@@ -9,24 +9,18 @@
 
 
 {% block content %}
-
-    <div class="container-fluid event_main_bg">
-        <h1 class="text-center"> Dancers </h1>
-
-        <div class="row">
-        {% for profile in object_list %}
-
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class ="event">
-                    {% include 'profiles/snippets/user_info.html' %}
-                </div>
-
+<div class="container-fluid event_main_bg">
+    <h1 class="text-center"> Dancers </h1>
+    <div class="row">
+    {% for profile in object_list %}
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class ="event">
+                {% include 'profiles/snippets/user_info.html' %}
             </div>
-        {% endfor %}
         </div>
-
+    {% endfor %}
     </div>
-
+</div>
 {% endblock %}
 
 <!-- Footer -->

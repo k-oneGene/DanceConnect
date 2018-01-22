@@ -30,7 +30,7 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-sm-12 text-left">
+        <div class="col-sm-12 text-left mb-2">
             <a href="{% url 'events:detail' pk=event.id %}" class="btn btn-sm btn-outline-info">Details</a>
             {% if user.is_authenticated %}
                 {% if event in user.profile.events.all %}

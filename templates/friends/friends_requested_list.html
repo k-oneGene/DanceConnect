@@ -4,12 +4,12 @@
 {% block title %} {{ block.super }} Friends {% endblock %}
 
 {% block content_reg %}
-    <h1 class="text-center"> Friends </h1>
+    <h1 class="text-center"> Requests </h1>
     <div class="row">
     {% for friend in object_list %}
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="event">
-                {% include 'friends/snippets/friends_box.html' with profile=friend.to_user.profile friend=friend %}
+                {% include 'friends/snippets/friends_box.html' with profile=friend.from_user.profile friend=friend %}
             </div>
         </div>
     {% endfor %}

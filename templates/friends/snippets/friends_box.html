@@ -28,18 +28,12 @@
 </div>
 <hr>
 <div class="row">
-    <div class="col-sm-12 text-left">
-        <a href="{% url 'profiles:detail' pk=profile.id %}" class="">Detail</a>
+    <div class="col-sm-12 text-left mb-2">
+        <a href="{% url 'profiles:detail' pk=profile.id %}" class="btn btn-outline-secondary btn-sm">Details</a>
     </div>
 </div>
 <div class="row">
-    {% if request.user.is_authenticated %}
-        <form class="going_form" method="POST" action='{% url "events:going" %}'> {% csrf_token %}
-            <input type="hidden" name="next" value="{{ request.path }}">
-            <input type="hidden" name="eventID" value="{{ eventID }}">
-            <button class="btn {% if is_going %} btn-secondary{% else %}btn-warning{% endif %}">{% if is_going %}Unfriend {% else %}Friend {% endif %}</button>
-        </form>
-    {% endif %}
+    {% include 'friends/snippets/friend_button.html' %}
 </div>
 <div class="row ">
     <div class="col-sm-12">

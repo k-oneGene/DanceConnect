@@ -3,6 +3,7 @@ from django.conf import settings
 from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
 import os
+from django.http import request
 
 from events.models import Category, Event
 from friends.models import Friend
@@ -88,12 +89,14 @@ class Profile(models.Model):
     def get_friends(self):
         return Friend.objects.filter((Q(from_user=self.user) | Q(to_user=self.user)) & Q(status='friend'))
 
-    def get_my_requests(self):
+    def get_friend_my_requests(self):
         return Friend.objects.filter(Q(from_user=self.user) & Q(status='requested'))
 
-    def get_friend_requests(self):
+    def get_friend_requested(self):
         return Friend.objects.filter(Q(to_user=self.user) & Q(status='requested'))
 
-    def get_blocked(self):
+    def get_friend_blocked(self):
         return Friend.objects.filter(Q(from_user=self.user) & Q(status='blocked'))
 
+    def get_friends_all_list(self):
+        return Friend.objects.filter((Q(from_user=self.user)))

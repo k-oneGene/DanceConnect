@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head_title %} {{ block.super }} Friends {% block title %}{% endblock %} {% endblock %}
+{% block navbar %}{% include 'snippets/nav.html' %}<br>{% include 'snippets/nav_friends.html' %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid event_main_bg">
+    {% block content_reg %}
+    {% endblock %}
+</div>
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock %}

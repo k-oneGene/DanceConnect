@@ -5,6 +5,7 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 
 
 from django.contrib.auth import authenticate, login
@@ -12,6 +13,8 @@ from django.contrib.auth import authenticate, login
 from .models import Profile
 from events.models import Event
 from .forms import ProfileForm
+
+from friends.models import Friend
 
 
 from django.http import HttpResponse, request
@@ -77,6 +80,15 @@ class ProfileListView(ListView):
 
 class ProfileDetailView(DetailView):
     model = Profile
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        profile = self.get_object()
+        # Pete request to me
+        context['friend_to_me'] = Friend.objects.filter(Q(from_user=profile.user) & Q(to_user=self.request.user)).first()
+        # I requested to this person
+        context['me_to_friend'] = Friend.objects.filter(Q(to_user=profile.user) & Q(from_user=self.request.user)).first()
+        return context
 
 
 class MyPastEventsListView(ListView):

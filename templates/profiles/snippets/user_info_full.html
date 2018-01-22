@@ -26,11 +26,13 @@
 </div>
 <hr>
 <div class="row">
-    {% if user.is_authenticated and profile.user_id == request.user.profile.user_id %}
-        <div class="col-sm-12 text-left">
-            <a href="{% url 'profiles:update'%}" class="btn btn-outline-success mb-2">Edit</a>
-        </div>
-    {% endif %}
+    <div class="col-sm-12 text-left mb-2">
+        {% if user.is_authenticated and profile.user_id == request.user.profile.user_id %}
+            <a href="{% url 'profiles:update'%}" class="btn btn-outline-success ">Edit</a>
+        {% else %}
+            {% include 'profiles/snippets/friend_button.html' %}
+        {% endif %}
+    </div>
 </div>
 <div class="row ">
     <div class="col-sm-12">
