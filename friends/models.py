@@ -80,14 +80,14 @@ class Friend(models.Model):
         # Check if I am blocked first
         try:
             friendship_rev = Friend.objects.get(from_user=to_user, to_user=from_user)
+            if friendship_rev.blocked:
+                return 'Person has blocked.'
         except Friend.DoesNotExist:
-            raise Http404('Person has not blocked.')
-
-        if not friendship_rev.blocked:
-            friendship, created = Friend.objects.get_or_create(from_user=from_user, to_user=to_user)
-            if created:
-                friendship.status = status
-                friendship.save()
+            pass
+        friendship, created = Friend.objects.get_or_create(from_user=from_user, to_user=to_user)
+        if created:
+            friendship.status = status
+            friendship.save()
 
 
     @staticmethod
@@ -140,7 +140,6 @@ class Friend(models.Model):
         except Friend.DoesNotExist:
             raise Http404('Can not find such request to unfriend.')
 
-
     @staticmethod
     def friend_block(from_user, to_user):
         try:
@@ -150,7 +149,6 @@ class Friend(models.Model):
                 friendship.save()
         except Friend.DoesNotExist:
             raise Http404('Can not find such friend to block.')
-
 
     @staticmethod
     def friend_unblock(from_user, to_user):

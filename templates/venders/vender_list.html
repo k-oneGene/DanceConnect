@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head_title %} {{ block.super }} Schools {% endblock %}
+
+<!-- Navbar -->
+{% block navbar %}{% include 'snippets/nav.html' %}{% endblock %}
+
+
+{% block content %}
+
+    <section>
+        <div class="container-fluid event_main_bg">
+            <h1 class="text-center"> Dance Schools </h1>
+            <div class="row">
+            {% for vender in object_list %}
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    {% include 'venders/snippets/vender_box_mini.html' %}
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock %}
+
+</body>
+</html>

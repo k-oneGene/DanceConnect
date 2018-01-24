@@ -7,6 +7,7 @@ import os
 
 from .utils import unique_slug_generator
 
+
 User = settings.AUTH_USER_MODEL
 
 
@@ -62,6 +63,9 @@ class Category(models.Model):
         return self.name
 
 
+from venders.models import Vender
+
+
 class Event(models.Model):
     creator = models.ForeignKey(User, models.CASCADE)
     categories = models.ManyToManyField(Category, blank=True)
@@ -72,6 +76,8 @@ class Event(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField() # todo: need validation to check start/end is smaller/bigger
     image = models.ImageField(upload_to=event_name_path, blank=True, null=True)
+
+    vender = models.ForeignKey(Vender, models.CASCADE, related_name='events')
 
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

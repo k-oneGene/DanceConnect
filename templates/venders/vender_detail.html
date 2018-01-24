@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head_title %} {{ block.super }} School - {{ vender.name }} {% endblock %}
+
+<!-- Navbar -->
+{% block navbar %}{% include 'snippets/nav.html' %}{% endblock %}
+
+
+{% block content %}
+
+    <div class="container event_main_bg">
+        <div class ="event eventDetail">
+            <div class="row ">
+                <img class="title_img rounded img-fluid mx-auto " src="{{ vender.image.url }}">
+            </div>
+            <div class="row">
+                <h1> {{ vender.name }} </h1>
+            </div>
+            <hr>
+            <div class="row">
+                <i class="icon ion-ios-person-outline mx-3">  Hosted by: {{ vender.owner }}</i>
+            </div>
+            <div class="row">
+                <i class="icon ion-ios-location-outline mx-3">  {{ vender.location }}</i>
+            </div>
+            <div class="row">
+                <i class="ion-ios-pricetags-outline mx-3">  {{ vender.list_category }}</i>
+            </div>
+            <hr>
+            <div class="row ">
+                <div class="col-sm-12">
+                    <pre> {{ vender.description}} <br> {% lorem 2 %} </pre>
+                </div>
+            </div>
+
+            <hr>
+            <div class="row">
+                {% include 'events/snippets/temp_buy_now.html' %}
+            </div>
+            <hr>
+
+        </div>
+
+
+        {% if user.is_authenticated and user.id == event.creator.id and user.profile %}
+            <div class="">
+                <a href="{% url 'events:edit' pk=event.pk %}"><button class="btn btn-outline-dark btn-sm mx-2">Edit</button></a>
+                <a href="{% url 'events:delete' pk=event.pk %}"><button class="btn btn-outline-danger btn-sm ">Delete</button></a>
+            </div>
+        {% endif %}
+
+    </div>
+
+
+
+    <div class="container-fluid event_main_bg_2">
+        <h1 class="text-center"> Latest events </h1>
+        <div class="row">
+            {% for event in events_list %}
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    {% include 'events/snippets/event_box_mini.html' %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row justify-content-center">
+            <a href='{% url 'events:list' %}'>More {{ vender.name }}</a>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock %}
+
+</body>
+</html>

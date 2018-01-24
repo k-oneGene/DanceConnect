@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'events',
     'search',
     'friends',
+    'venders',
 ]
 
 MIDDLEWARE = [
