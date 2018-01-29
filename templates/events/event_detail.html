@@ -61,10 +61,16 @@
                             </div>
                         {% endif %}
                     </div>
-                    <hr>
-                    <div class="row">
-                        {% include 'events/snippets/temp_buy_now.html' %}
-                    </div>
+                    {% if event.payment %}
+                        <hr>
+                        <div class="row">
+                            {% if event.payment.type == 'buy_now' %}
+                                {% include 'events/snippets/temp_buy_now.html' %}
+                            {% elif event.payment.type == 'buy_now_multi' %}
+                                {% include 'events/snippets/temp_buy_now_multi.html' %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
                     <hr>
                     <div class="row">
                         <pre> {{ event.description }}</pre>

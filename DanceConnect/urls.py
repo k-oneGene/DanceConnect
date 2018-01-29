@@ -35,6 +35,7 @@ urlpatterns = [
     path('search/', include('search.urls', namespace='search')),
     path('friends/', include('friends.urls', namespace='friends')),
     path('venders/', include('venders.urls', namespace='venders')),
+    # path('payments/', include('payments.urls', namespace='payments')),
     path('home/', MyHomeListView.as_view(), name='my_home'),
 
 

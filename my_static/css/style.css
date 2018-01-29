@@ -444,3 +444,41 @@ pre {
 
 
 
+/**************/
+/* Vender_Detail */
+/**************/
+
+.vender_detail_bg {
+    background-color: #ffffff; /* White */
+    color: #555555;
+    font-size: 1em;
+}
+
+.vender_detail_header {
+    background-repeat: no-repeat;
+    /*background-size: cover;*/
+    background-size: 100% 100%;
+    /*min-height: 250px;*/
+    /*max-height: 350px;*/
+    height: 250px;
+
+}
+
+.venderDetail {
+    /*max-height: none;*/
+    /*border: 1px solid #dedede;*/
+    /*padding: 25px;*/
+    /*margin: 25px;*/
+    /*background-color: #fffee8;*/
+}
+
+.container-fluid-no-top {
+    padding-top: 0px;
+}
+
+/*.event_main_bg_2 {*/
+    /*background-color: #f4f4f4; !* White *!*/
+    /*color: #555555;*/
+    /*font-size: small;*/
+/*}*/
+

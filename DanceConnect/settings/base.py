@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'search',
     'friends',
     'venders',
+    'payments',
 ]
 
 MIDDLEWARE = [

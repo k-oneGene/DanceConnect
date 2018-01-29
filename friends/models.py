@@ -23,10 +23,6 @@ class FriendManager(models.Manager):
         if from_user == to_user:
             raise ValidationError("Can not friend yourself.")
 
-        # Since my process deletes previous attempt to friend, It doesn't need this in my process?
-        # if self.are_friends(from_user, to_user):
-        #     raise AlreadyFriendsError("Users are already friends")
-
         if message is None:
             message = ''
 
@@ -61,7 +57,7 @@ class FriendManager(models.Manager):
 class Friend(models.Model):
     from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='from_user+')
     to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user+')
-    status = models.CharField(max_length=255, choices=RELATIONSHIP_STATUSES)
+    status = models.CharField(max_length=50, choices=RELATIONSHIP_STATUSES)
     blocked = models.BooleanField(blank=True, default=False)
     # req_message
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -71,6 +67,25 @@ class Friend(models.Model):
 
     def __str__(self):
         return f'{self.from_user.username}_to_{self.to_user.username}_{self.status}'
+
+    # Am I blocked?, Check if I am blocked.
+    @staticmethod
+    def blocked_status(from_user, to_user):
+        try:
+            friendship_rev = Friend.objects.get(from_user=to_user, to_user=from_user)
+            if friendship_rev.blocked:
+                return True
+            return False
+        except Friend.DoesNotExist:
+            return False
+
+
+    @staticmethod
+    def friend_make_status(from_user, to_user, status):
+        friendship, create = Friend.objects.get_or_create(from_user=from_user, to_user=to_user)
+        friendship.status = status
+        friendship.save()
+
 
     """
     djinn makes request to adds peter
@@ -82,6 +97,9 @@ class Friend(models.Model):
             friendship_rev = Friend.objects.get(from_user=to_user, to_user=from_user)
             if friendship_rev.blocked:
                 return 'Person has blocked.'
+            if friendship_rev.status == 'requested':
+                Friend.friend_make_status(from_user, to_user, status='friend')
+                Friend.friend_make_status(to_user, from_user, status='friend')
         except Friend.DoesNotExist:
             pass
         friendship, created = Friend.objects.get_or_create(from_user=from_user, to_user=to_user)
@@ -97,7 +115,8 @@ class Friend(models.Model):
             if friendship.status == 'requested':
                 friendship.delete()
         except Friend.DoesNotExist:
-            raise Http404('Can not find such request to unrequest')
+            # raise Http404('Can not find such request to unrequest')
+            pass
 
     """
     peter decides to accept djinn as friend.
@@ -112,9 +131,10 @@ class Friend(models.Model):
                 friendship.status = 'friend'
                 friendship.save()
                 # Add relationship other way
-                Friend.friend_add(to_user, from_user, status='friend')
+                Friend.friend_make_status(to_user, from_user, status='friend')
         except Friend.DoesNotExist:
-            raise Http404('Can not find such request to accept')
+            # raise Http404('Can not find such request to accept')
+            pass
         return friendship
 
     #Removes friendship request.
@@ -125,7 +145,8 @@ class Friend(models.Model):
             if friendship.status == 'requested':
                 friendship.delete()
         except Friend.DoesNotExist:
-            raise Http404('Can not find such request to remove.')
+            # raise Http404('Can not find such request to remove.')
+            pass
         return friendship
 
     @staticmethod
@@ -138,7 +159,8 @@ class Friend(models.Model):
                 friendship_reverse = Friend.objects.get(Q(to_user=from_user) & Q(from_user=to_user))
                 friendship_reverse.delete()
         except Friend.DoesNotExist:
-            raise Http404('Can not find such request to unfriend.')
+            # raise Http404('Can not find such request to unfriend.')
+            pass
 
     @staticmethod
     def friend_block(from_user, to_user):
