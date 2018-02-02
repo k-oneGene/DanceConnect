@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load pinax_messages_tags %}
+
+
+{% block head_title %} {{ block.super }} {{ user.username }} {% endblock %}
+
+<!-- Navbar -->
+{% block navbar %}
+    {% include 'snippets/nav.html' %}
+    <br>
+    {% include 'snippets/nav_myhome.html' %}
+    <br>
+    {% include 'pinax/messages/snippets/nav.html' %}
+{% endblock %}
+
+
+{% block content %}
+    {% block content_msg %}
+    {% endblock %}
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock %}
+
+</body>
+</html>

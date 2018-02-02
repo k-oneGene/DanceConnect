@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <div class="container">
     <nav class="nav nav-pills justify-content-center nav-search">
         <a class="nav-item nav-link" href="{% url 'profiles:my_future' %}">My Events</a>
@@ -6,6 +8,9 @@
         <a class="nav-item nav-link disabled" href="#">Teachers</a>
         <a class="nav-item nav-link" href="{% url 'profiles:update'%}">Edit Profile</a>
         <a class="nav-item nav-link" href="{% url 'friends:friends'%}">Friends</a>
+
+        <a class="nav-item nav-link" href="{% url 'pinax_messages:inbox' %}"><i class="fa fa-envelope"></i> {% trans "Message Inbox" %}</a>
+
     </nav>
     <hr>
 </div>

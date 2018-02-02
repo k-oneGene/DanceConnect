@@ -1,0 +1,42 @@
+{% extends "pinax/base.html" %}
+​
+{% load i18n %}
+{% load pinax_messages_tags %}
+​
+{% block head_title %}Messages{% endblock %}
+​
+{% block content_msg %}
+
+    <div class="container event_main_bg">
+        <h1 class="text-center">Inbox</h1>
+
+        {% for thread in threads %}
+            <div class="row">
+                <div class="inbox_box">
+                    <a href="{{thread.get_absolute_url}}">
+                        <div class="row">
+                        <div class="col-4">
+    {#                    <div class="thread {% if thread|unread:user %}unread{% endif %}">#}
+                            <div class="participants">Sent between: {{ thread.users.all|join:", " }}</div>
+                        </div>
+                        <div class="col-4">
+                            <div class="latest-message">
+                                <div class="subject">Subject: {{ thread.subject }}</div>
+                                <div>Time: {{ thread.first_message.sent_at }}</div>
+                                <div class="content">{{ thread.latest_message.content }}</div>
+                            </div>
+                        </div>
+    {#                    </div>#}
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <hr>
+        {% empty %}
+            <div class="no-messages">You have no messages.</div>
+        {% endfor %}
+
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% load i18n %}
+
+<div class="container">
+    <nav class="nav nav-pills justify-content-center nav-search">
+        <a class="nav-item nav-link" href="{% url 'pinax_messages:inbox' %}"><i class="fa fa-envelope"></i> {% trans "Inbox" %}</a>
+        <a class="nav-item nav-link" href="{% url 'pinax_messages:message_create' %}"><i class="fa fa-envelope"></i> {% trans "Send message" %}</a>
+
+    </nav>
+    <hr>
+</div>

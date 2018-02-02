@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 
+from django.conf.urls import url
+
+
 
 from .views import (
     HomeView,
@@ -35,8 +38,10 @@ urlpatterns = [
     path('search/', include('search.urls', namespace='search')),
     path('friends/', include('friends.urls', namespace='friends')),
     path('venders/', include('venders.urls', namespace='venders')),
-    # path('payments/', include('payments.urls', namespace='payments')),
+    path('payments/', include('payments.urls', namespace='payments')),
     path('home/', MyHomeListView.as_view(), name='my_home'),
+
+    url(r"^messages/", include("pinax.messages.urls", namespace="pinax_messages")),
 
 
     # path('profiles/', include('django.contrib.auth.urls')), # TODO: I remember fixing this issue before with another url. Maybe It was different issue?

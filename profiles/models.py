@@ -3,7 +3,6 @@ from django.conf import settings
 from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
 import os
-from django.http import request
 
 from events.models import Category, Event
 from friends.models import Friend

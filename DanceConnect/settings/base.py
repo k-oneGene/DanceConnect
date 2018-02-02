@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'friends',
     'venders',
     'payments',
+
+    'pinax.messages',
 ]
 
 MIDDLEWARE = [
@@ -92,6 +94,8 @@ TEMPLATES = [
 
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
+
+                "pinax.messages.context_processors.user_messages",
             ],
         },
     },

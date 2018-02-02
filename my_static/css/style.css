@@ -482,3 +482,53 @@ pre {
     /*font-size: small;*/
 /*}*/
 
+
+
+/******************/
+/* Messages Inbox */
+/******************/
+
+.inbox_box {
+    border: 1px solid #9fcdff;
+    width: 100%;
+    padding: 0px;
+    margin: 5px;
+    background-color: #cce5ff;
+}
+
+.inbox_box a {
+    text-decoration: none;
+    color: #171a1d;
+}
+
+.inbox_box .subject {
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.inbox_box .content {
+    padding-top: 15px;
+    font-weight: lighter;
+}
+
+
+/*******************/
+/* Messages Thread */
+/*******************/
+
+.msg_box {
+    border: 1px solid #9fcdff;
+    height: 300px;
+    overflow-y: auto;
+    padding: 0px;
+    margin: 0px;
+    background-color: #cce5ff;
+}
+
+.msg_reply_box {
+    border: 1px solid #9fcdff;
+    height: 100px;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}

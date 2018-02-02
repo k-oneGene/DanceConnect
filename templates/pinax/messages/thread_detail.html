@@ -1,0 +1,40 @@
+{% extends "pinax/base.html" %}
+{% load crispy_forms_tags %}
+{% load pinax_messages_tags %}
+{% load widget_tweaks %}
+
+
+{% block head_title %}Messages{% endblock %}
+
+
+{% block content_msg %}
+<div class="container event_main_bg">
+    <h2 class="with-actions">
+        {{ thread.subject }}
+        <a class="button" href="{% url "pinax_messages:thread_delete" thread.pk %}">Delete Thread</a>
+    </h2>
+
+    <div class="msg_box">
+        {% for message in thread.messages.all %}
+            <div class="thread-message">
+                <div class="message-byline">
+                    <div class="message-from">{{ message.sender.username }}</div>
+                    <div class="message-sent">{{ message.sent_at }}</div>
+                </div>
+                <div class="message-content">{{ message.content|urlize|linebreaks }}</div>
+            </div>
+        {% endfor %}
+    </div>
+    <form class="" action="{% url "pinax_messages:thread_detail" thread.pk %}" method="post">
+        {% csrf_token %}
+        {% render_field form.content class="msg_reply_box" %}
+{#        {{ form.content }}#}
+        <div class="clearfix">
+{#            <a href="{% url "pinax_messages:inbox" %}" class="cancel">Cancel</a>#}
+            <button class="btn btn-info pull-right">Send</button>
+        </div>
+{#        <div style="clear: both"></div>#}
+    </form>
+
+</div>
+{% endblock %}
