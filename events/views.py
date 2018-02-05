@@ -134,3 +134,5 @@ class EventGoingToggle(LoginRequiredMixin, View):
 
 
 # return redirect(reverse("events:detail", kwargs={'pk': event_.id})) #redirect(f"{profile_.user.username}/")
+
+
