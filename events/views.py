@@ -50,6 +50,13 @@ class EventDetailView(DetailView):
         #     if event in self.request.user.profile.events.all():
         #         is_going = True
         #     context['is_going'] = is_going
+
+        user = self.request.user
+        event = self.get_object()
+
+        context['has_paid'] = False
+        if user.transactionpl.filter(event=event).exists():
+            context['has_paid'] = True
         return context
 
 

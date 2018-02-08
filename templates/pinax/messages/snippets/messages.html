@@ -3,13 +3,14 @@
         {% if message.sender_id == request.user.id %}
             <div class="d-flex flex-row-reverse px-2">
                 <div class="d-flex flex-column px-2">
-                    <div class="d-flex flex-row-reverse">
-                        <div class="message-from ">{{ message.sender.username }}</div>
+{#                    <div class="d-flex flex-row-reverse">#}
+{#                        <div class="message-from ">{{ message.sender.username }}</div>#}
+{#                    </div>#}
+{#                    <div class="d-flex flex-row-reverse">#}
+{#                        <div class="message-sent ">{{ message.sent_at }}</div>#}
+{#                    </div>#}
+                    <div class="message-content " title="{{ message.sent_at }}">{{ message.content|urlize|linebreaks }}
                     </div>
-                    <div class="d-flex flex-row-reverse">
-                        <div class="message-sent ">{{ message.sent_at }}</div>
-                    </div>
-                    <div class="message-content ">{{ message.content|urlize|linebreaks }}</div>
                 </div>
             </div>
         {% else %}
@@ -17,8 +18,8 @@
                 <img class="rounded-circle " src="{{ message.sender.profile.image.url }}" width="40" height="40">
                 <div class="d-flex flex-column px-2">
                     <div class="message-from">{{ message.sender.username }}</div>
-                    <div class="message-sent">{{ message.sent_at }}</div>
-                    <div class="message-content">{{ message.content|urlize|linebreaks }}</div>
+{#                    <div class="message-sent">{{ message.sent_at }}</div>#}
+                    <div class="message-content_r" title="{{ message.sent_at }}">{{ message.content|urlize|linebreaks }}</div>
                 </div>
             </div>
         {% endif %}

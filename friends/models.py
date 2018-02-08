@@ -66,7 +66,9 @@ class Friend(models.Model):
     objects = FriendManager()
 
     def __str__(self):
+        #TODO: Hmm, original way is better. I need another way of returning for message "to user" list on messages/create/ page. This is more of temp fix.
         return f'{self.from_user.username}_to_{self.to_user.username}_{self.status}'
+        # return f'{self.to_user.username}'
 
     # Am I blocked?, Check if I am blocked.
     @staticmethod

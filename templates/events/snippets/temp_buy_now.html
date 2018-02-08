@@ -1,31 +1,39 @@
+{#TODO: event.payment.pricing.all.0 maybe need to be replaced for multiple choice. Maybe isn't not problem..#}
 
 {% if event.payment %}
-    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
-        Price: {{ event.payment.pricing.all.0.amount }} <br>
 
-        <input type="hidden" name="cmd" value="_xclick">
-        <input type="hidden" name="business" value="6NXJSS8ZL6PCC">
-        <input type="hidden" name="lc" value="GB">
-        <input type="hidden" name="item_name" value="test_item_01">
-        <input type="hidden" name="amount" value="{{ event.payment.pricing.all.0.amount }}">
-        <input type="hidden" name="currency_code" value="GBP">
-        <input type="hidden" name="button_subtype" value="services">
-        <input type="hidden" name="no_note" value="0">
-        <input type="hidden" name="cn" value="Add special instructions to the seller:">
-        <input type="hidden" name="no_shipping" value="2">
-        <input type="hidden" name="shipping" value="0.00">
+    {% if has_paid %}
+        <br>
+        Price: {{ event.payment.pricing.all.0.amount }}
+        <p>You have already paid for the event.</p>
+    {% else %}
+        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            Price: {{ event.payment.pricing.all.0.amount }} <br>
 
-{#        Custom hard coded for testing purposes. #}
-        <input type="hidden" name="notify_url" value="http://2f2856da.ngrok.io/payments/ipn">
-        <input type="hidden" name="custom" value="eventID={{ event.id }}, userID={{ user.id }}, paymentID={{ event.payment.id }}, pricingID={{ event.payment.pricing.id }}">
+            <input type="hidden" name="cmd" value="_xclick">
+            <input type="hidden" name="business" value="6NXJSS8ZL6PCC">
+            <input type="hidden" name="lc" value="GB">
+            <input type="hidden" name="item_name" value="test_item_01">
+            <input type="hidden" name="amount" value="{{ event.payment.pricing.all.0.amount }}">
+            <input type="hidden" name="currency_code" value="GBP">
+            <input type="hidden" name="button_subtype" value="services">
+            <input type="hidden" name="no_note" value="0">
+            <input type="hidden" name="cn" value="Add special instructions to the seller:">
+            <input type="hidden" name="no_shipping" value="2">
+            <input type="hidden" name="shipping" value="0.00">
 
-    {#    Change Value to 2 and maybe I can go to Thank you success page instead?#}
-        <input type="hidden" name="rm" value="1">
-        <input type="hidden" name="return" value="{{ request.build_absolute_uri }}{{ object.get_absolute_url }}">
-        <input type="hidden" name="cancel_return" value="{{ request.build_absolute_uri }}{{ object.get_absolute_url }}">
+    {#        Custom hard coded for testing purposes. #}
+            <input type="hidden" name="notify_url" value="http://a40f3df4.ngrok.io/payments/ipn">
+            <input type="hidden" name="custom" value="{{ event.id }}, {{ user.id }}, {{ event.payment.id }}, {{ event.payment.pricing.all.0.id }}">
 
-        <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
-        <input type="image" src="https://www.sandbox.paypal.com/en_US/GB/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
-        <img alt="" border="0" src="https://www.sandbox.paypal.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-    </form>
+        {#    Change Value to 2 and maybe I can go to Thank you success page instead?#}
+            <input type="hidden" name="rm" value="1">
+            <input type="hidden" name="return" value="{{ request.build_absolute_uri }}{{ object.get_absolute_url }}">
+            <input type="hidden" name="cancel_return" value="{{ request.build_absolute_uri }}{{ object.get_absolute_url }}">
+
+            <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+            <input type="image" src="https://www.sandbox.paypal.com/en_US/GB/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+            <img alt="" border="0" src="https://www.sandbox.paypal.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+        </form>
+    {% endif %}
 {% endif %}

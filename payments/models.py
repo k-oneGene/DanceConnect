@@ -74,8 +74,12 @@ class TransactionPaypal(models.Model):
     pl_shipping = models.CharField(max_length=64)
     pl_tax = models.CharField(max_length=64)
     # Relations to my models
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='transactionpl')
     pricing = models.ForeignKey(Pricing, on_delete=models.CASCADE, related_name='transactionpl')
     buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='transactionpl')
+    status = models.CharField(max_length=64)
 
     def __str__(self):
         return f'{self.pricing.payment.event} - {self.buyer}'
+
+    # def is_paid(self, user):

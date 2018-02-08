@@ -7,7 +7,9 @@ class DefaultHookSet(object):
         return str(user)
 
     def get_user_choices(self, user):
-        return get_user_model().objects.exclude(id=user.id)
+        # print(user.profile.get_friends().exclude(id=user.id))
+        # return get_user_model().objects.exclude(id=user.id)
+        return user.profile.return_user_friends()
 
 
 class HookProxy(object):

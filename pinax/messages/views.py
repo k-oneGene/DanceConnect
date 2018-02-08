@@ -145,7 +145,5 @@ class ThreadDeleteView(DeleteView):
 
 
 def Messages(request):
-    # print('hereeeeeeeeeeeee')
-    # print(request.path)
     c = Thread.objects.get(id=1) #get(thread_id=request.kwargs['pk'])
     return render(request, 'pinax/messages/snippets/messages.html', {'thread': c})

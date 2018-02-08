@@ -3,6 +3,8 @@ from django.conf import settings
 from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
 import os
+from django.contrib.auth import get_user_model
+
 
 from events.models import Category, Event
 from friends.models import Friend
@@ -86,7 +88,14 @@ class Profile(models.Model):
         return all_cat
 
     def get_friends(self):
-        return Friend.objects.filter((Q(from_user=self.user) | Q(to_user=self.user)) & Q(status='friend'))
+        return Friend.objects.filter((Q(from_user=self.user)) & Q(status='friend'))
+    # | Q(to_user=self.user)
+
+    # Returns friends as user object.
+    def return_user_friends(self):
+        friends = Friend.objects.filter((Q(from_user=self.user)) & Q(status='friend'))
+        user_list = [friend.to_user.id for friend in friends]
+        return get_user_model().objects.filter(id__in=user_list)
 
     def get_friend_my_requests(self):
         return Friend.objects.filter(Q(from_user=self.user) & Q(status='requested'))
@@ -99,3 +108,6 @@ class Profile(models.Model):
 
     def get_friends_all_list(self):
         return Friend.objects.filter((Q(from_user=self.user)))
+
+    # def has_paid(self):
+    #
