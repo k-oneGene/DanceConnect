@@ -9,7 +9,7 @@ define(function () {
 
       var message = 'Por favor apague ' + overChars + ' ';
 
-      message += overChars != 1 ? 'caracteres' : 'caractere';
+      message += overChars != 1 ? 'caracteres' : 'carácter';
 
       return message;
     },

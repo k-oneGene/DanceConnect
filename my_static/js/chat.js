@@ -18,11 +18,17 @@ var chatSubmitAction = function(event){
 $('#chat-form').on('submit', chatSubmitAction);
 
 function getMessages(){
+    var thread_id, pathname
+    pathname = window.location.pathname;
+    thread_id = pathname.split('/')[3];
+
     if (!scrolling) {
-        $.get('/messages/messages', function(messages){
+        $.get('/messages/messages',{thread_id: thread_id}, function(messages){
             $('#id_msg_box').html(messages);
             var chatThread = document.getElementById('id_msg_box');
             chatThread.scrollTop = chatThread.scrollHeight;
+
+
         });
     }
     scrolling = false;

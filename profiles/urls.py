@@ -13,6 +13,7 @@ from .views import (
     SignUpProfileCreateView,
     MyPastEventsListView,
     MyFutureEventsListView,
+    MyNotificationsView,
     login_test_view
 )
 
@@ -30,6 +31,8 @@ urlpatterns = [
 
     path('past_events/', MyPastEventsListView.as_view(), name='my_past'),
     path('future_events/', MyFutureEventsListView.as_view(), name='my_future'),
+
+    path('notifications/', MyNotificationsView.as_view(), name='my_notifications'),
 
 ]
 

@@ -1,8 +1,9 @@
 from django.db import models
 from django.conf import settings
-from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.http import Http404
+from notify.signals import notify
+from django.shortcuts import reverse
 
 from django.core.exceptions import ValidationError
 from .exceptions import AlreadyExistsError, AlreadyFriendsError
@@ -102,12 +103,26 @@ class Friend(models.Model):
             if friendship_rev.status == 'requested':
                 Friend.friend_make_status(from_user, to_user, status='friend')
                 Friend.friend_make_status(to_user, from_user, status='friend')
+
+                # Notify friend request sender
+                notify.send(to_user, recipient=from_user, actor=to_user, verb=' has accepted friendship request.', nf_type='friends_all')
+                # Notify yourself
+                # TODO: Maybe change this later somewhere for better message (nf_type and template)
+                notify.send(from_user, recipient=to_user, actor=from_user, verb=' accepted ', nf_type='friends_accept_self')
+
+
         except Friend.DoesNotExist:
             pass
         friendship, created = Friend.objects.get_or_create(from_user=from_user, to_user=to_user)
         if created:
             friendship.status = status
             friendship.save()
+            # Jin addeds Amy
+            # (actor=Who, verb=What?,
+            notify.send(from_user, recipient=to_user, actor=from_user, verb=' has sent friendship requested. ', nf_type='friends_add' , actor_url_text=reverse('profiles:profile'))
+
+
+
 
 
     @staticmethod

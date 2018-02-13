@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include, re_path
+from django.urls import path, include
 
 from django.conf.urls import url
 
@@ -42,6 +42,8 @@ urlpatterns = [
     path('home/', MyHomeListView.as_view(), name='my_home'),
 
     url(r"^messages/", include("pinax.messages.urls", namespace="pinax_messages")),
+
+    url(r'^notifications/', include('notify.urls', 'notifications')),
 
 
     # path('profiles/', include('django.contrib.auth.urls')), # TODO: I remember fixing this issue before with another url. Maybe It was different issue?

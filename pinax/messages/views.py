@@ -4,6 +4,7 @@ from django.utils.decorators import method_decorator
 
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 from django.views.generic import (
     CreateView,
@@ -15,10 +16,6 @@ from django.views.generic import (
 from .forms import MessageReplyForm, NewMessageForm, NewMessageFormMultiple
 from .models import Thread, Message
 
-try:
-    from account.decorators import login_required
-except:  # noqa
-    from django.contrib.auth.decorators import login_required
 
 
 class InboxView(TemplateView):
@@ -144,6 +141,8 @@ class ThreadDeleteView(DeleteView):
         return HttpResponseRedirect(success_url)
 
 
+#TODO: This needs security check to make sure user has authority to view their own chat.
 def Messages(request):
-    c = Thread.objects.get(id=1) #get(thread_id=request.kwargs['pk'])
+    thread_id = request.GET['thread_id']
+    c = Thread.objects.get(id=thread_id)
     return render(request, 'pinax/messages/snippets/messages.html', {'thread': c})

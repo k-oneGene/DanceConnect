@@ -63,7 +63,7 @@
                     </div>
                     {% if event.payment %}
                         <hr>
-                        <div class="row">
+                        <div class="">
                             {% if event.payment.type == 'buy_now' %}
                                 {% include 'events/snippets/temp_buy_now.html' %}
                             {% elif event.payment.type == 'buy_now_multi' %}

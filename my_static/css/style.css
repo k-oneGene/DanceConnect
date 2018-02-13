@@ -620,3 +620,12 @@ pre {
     background-color: #1abc9c;
 }
 
+/*****************/
+/* Notifications */
+/*****************/
+
+/* friends_all */
+
+.timesince {
+    font-size: 0.7em;
+}

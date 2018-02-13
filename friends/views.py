@@ -6,12 +6,15 @@ from django.shortcuts import redirect, reverse, HttpResponseRedirect, Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.contrib.auth.models import User
+from notify.signals import notify
 
 
 from profiles.models import Profile
 from friends.models import Friend
 # Create your views here.
 
+
+#TODO: All or most of post are not needed because now I'm doing it through get due to some good reason.
 
 class Friend_Add(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
@@ -31,6 +34,8 @@ class Friend_Add(LoginRequiredMixin, View):
         to_user = User.objects.get(pk=to_user_id)
         from_user = self.request.user
         Friend.objects.add_friend(from_user, to_user)
+
+
         next = request.session.get('next')
         return HttpResponseRedirect(next)
 
@@ -63,6 +68,13 @@ class Friend_Accept(LoginRequiredMixin, View):
         from_user = User.objects.get(pk=from_user_id)
         to_user = self.request.user
         Friend.objects.accept_friend(from_user, to_user)
+
+        # Notify friend request sender
+        notify.send(to_user, recipient=from_user, actor=to_user, verb=' has accepted friendship request.', nf_type='friends_all')
+
+        # Notify yourself
+        notify.send(from_user, recipient=to_user, actor=from_user, verb=' accepted ', nf_type='friends_accept_self')
+
         next = request.session.get('next')
         return HttpResponseRedirect(next)
 

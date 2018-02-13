@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head_title %} {{ block.super }} {{ user.nickname }}'s notifications {% endblock %}
+
+{% block navbar %}{% include 'snippets/nav.html' %} <br> {% include 'snippets/nav_myhome.html' %}{% endblock %}
+
+
+{% block content %}
+    <div class="container-fluid event_main_bg">
+        <h1 class="text-center"> My Notifications </h1>
+        <div class="">
+            {% load notification_tags %}
+            {% user_notifications %}
+        </div>
+    </div>
+{% endblock %}
+<!-- Footer -->
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock %}
+
+</body>
+</html>

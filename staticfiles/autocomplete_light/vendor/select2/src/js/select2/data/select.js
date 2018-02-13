@@ -170,7 +170,7 @@ define([
       }
     }
 
-    if (data.id !== undefined) {
+    if (data.id) {
       option.value = data.id;
     }
 

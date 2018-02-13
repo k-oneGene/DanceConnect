@@ -1,11 +1,13 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, FormView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, FormView, TemplateView
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+
+from notify.signals import notify
 
 
 from django.contrib.auth import authenticate, login
@@ -84,6 +86,9 @@ class ProfileDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         profile = self.get_object()
+
+        # notify.send(self.request.user, recipient=self.request.user, actor=self.request.user, verb='testing YEEEH.', nf_type='followed_user')
+
         # Pete request to me
         context['friend_to_me'] = Friend.objects.filter(Q(from_user=profile.user) & Q(to_user=self.request.user)).first()
         # I requested to this person
@@ -109,6 +114,14 @@ class MyFutureEventsListView(ListView):
     def get_queryset(self):
         now = pendulum.now()
         return self.request.user.profile.events.all().filter(end__gte=now).order_by('start')
+
+
+class MyNotificationsView(TemplateView):
+    template_name = 'notifications/notifications_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MyNotificationsView, self).get_context_data(**kwargs)
+        return context
 
 
 def login_test_view(request):

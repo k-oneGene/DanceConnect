@@ -16,9 +16,14 @@ class Thread(models.Model):
     subject = models.CharField(max_length=150)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, through="UserThread")
 
+    # Original
     @classmethod
     def inbox(cls, user):
         return cls.objects.filter(userthread__user=user, userthread__deleted=False)
+
+    # @classmethod
+    # def inbox(cls, user):
+    #     return cls.objects.filter(userthread__user=user)
 
     @classmethod
     def deleted(cls, user):
@@ -105,7 +110,7 @@ class Message(models.Model):
         thread = Thread.objects.create(subject=subject)
         for user in to_users:
             thread.userthread_set.create(user=user, deleted=False, unread=True)
-        thread.userthread_set.create(user=from_user, deleted=True, unread=False)
+        thread.userthread_set.create(user=from_user, deleted=False, unread=False) # Changed deleted to False to see it in my "inbox aka chatbox"
         msg = cls.objects.create(thread=thread, sender=from_user, content=content)
         message_sent.send(sender=cls, message=msg, thread=thread, reply=False)
         return msg

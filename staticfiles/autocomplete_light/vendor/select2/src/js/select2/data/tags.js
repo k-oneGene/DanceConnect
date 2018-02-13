@@ -53,10 +53,7 @@ define([
           }, true)
         );
 
-        var optionText = (option.text || '').toUpperCase();
-        var paramsTerm = (params.term || '').toUpperCase();
-
-        var checkText = optionText === paramsTerm;
+        var checkText = option.text === params.term;
 
         if (checkText || checkChildren) {
           if (child) {

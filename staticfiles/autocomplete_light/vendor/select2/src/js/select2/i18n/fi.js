@@ -1,9 +1,6 @@
 define(function () {
   // Finnish
   return {
-    errorLoading: function () {
-      return 'Tuloksia ei saatu ladattua.';
-    },
     inputTooLong: function (args) {
       var overChars = args.input.length - args.maximum;
 
@@ -24,7 +21,7 @@ define(function () {
       return 'Ei tuloksia';
     },
     searching: function () {
-      return 'Haetaan…';
+
     }
   };
 });

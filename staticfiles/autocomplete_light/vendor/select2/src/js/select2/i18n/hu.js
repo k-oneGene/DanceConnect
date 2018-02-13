@@ -1,9 +1,6 @@
 define(function () {
   // Hungarian
   return {
-    errorLoading: function () {
-      return 'Az eredmények betöltése nem sikerült.';
-    },
     inputTooLong: function (args) {
       var overChars = args.input.length - args.maximum;
 

@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'payments',
 
     'pinax.messages',
+    'notify'
 ]
 
 MIDDLEWARE = [
@@ -142,6 +143,13 @@ AUTHENTICATION_BACKENDS = (
 
     'django.contrib.auth.backends.ModelBackend',
 )
+
+
+# For notification
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: "/profiles/%s/" % u.profile.id,
+}
+
 
 
 
