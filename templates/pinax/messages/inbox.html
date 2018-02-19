@@ -16,10 +16,10 @@
                         <div class="row">
                         <div class="col-4">
     {#                    <div class="thread {% if thread|unread:user %}unread{% endif %}">#}
-                            <div class="participants">Sent between: {{ thread.users.all|join:", " }}</div>
+                            <div class="">Sent between: {{ thread.users.all|join:", " }}</div>
                         </div>
                         <div class="col-4">
-                            <div class="latest-message">
+                            <div class="">
                                 <div class="subject">Subject: {{ thread.subject }}</div>
                                 <div>Time: {{ thread.first_message.sent_at }}</div>
                                 <div class="content">{{ thread.latest_message.content }}</div>

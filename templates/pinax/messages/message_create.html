@@ -7,16 +7,30 @@
 
 
 {% block content_msg %}
-<div class="container event_main_bg">
-    <h2>New Message</h2>
 
-    <form class="comment-form" action="{% url "pinax_messages:message_create" %}" method="post">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <div class="form-actions">
-            <a href="{% url "pinax_messages:inbox" %}" class="btn btn-secondary">Cancel</a>
-            <button class="btn btn-warning">Send</button>
-        </div>
-    </form>
+{% load static %}
+{#<link href="{% static 'autocomplete_light/vendor/select2/dist/css/select2.css' %}" type="text/css" media="all" rel="stylesheet" />#}
+{#<link href="{% static 'autocomplete_light/select2.css' %}" type="text/css" media="all" rel="stylesheet" />#}
+{#<script type="text/javascript" src="{% static 'autocomplete_light/autocomplete.init.js' %}"></script>#}
+{#<script type="text/javascript" src="{% static 'autocomplete_light/select2.js' %}"></script>#}
+
+
+{#TODO: Temp, added CSS styling here of width. #}
+<div class="container send_message">
+    <div class="">
+        <h2>New Chat</h2>
+        <form class="comment-form" action="{% url "pinax_messages:message_create" %}" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="form-actions">
+                <a href="{% url "pinax_messages:inbox" %}" class="btn btn-secondary">Cancel</a>
+                <button class="btn btn-warning">Send</button>
+            </div>
+        </form>
+    </div>
 </div>
+
+
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+{{ form.media }}
 {% endblock %}

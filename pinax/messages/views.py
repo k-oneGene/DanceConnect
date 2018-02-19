@@ -1,10 +1,15 @@
-from django.http import HttpResponseRedirect
+from django.shortcuts import redirect, reverse
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
+from django.contrib.auth import get_user_model
+
 
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
+from dal import autocomplete
+
 
 from django.views.generic import (
     CreateView,
@@ -15,7 +20,6 @@ from django.views.generic import (
 
 from .forms import MessageReplyForm, NewMessageForm, NewMessageFormMultiple
 from .models import Thread, Message
-
 
 
 class InboxView(TemplateView):
@@ -30,6 +34,95 @@ class InboxView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(InboxView, self).get_context_data(**kwargs)
+        if self.kwargs.get("deleted", None):
+            threads = Thread.ordered(Thread.deleted(self.request.user))
+            folder = "deleted"
+        else:
+            threads = Thread.ordered(Thread.inbox(self.request.user))
+            folder = "inbox"
+
+        context.update({
+            "folder": folder,
+            "threads": threads,
+            "threads_unread": Thread.ordered(Thread.unread(self.request.user))
+        })
+        return context
+
+
+class ChatView(TemplateView):
+    """
+    View chat box.
+    """
+    template_name = "pinax/messages/chat.html"
+    model = Thread
+    form_class = MessageReplyForm
+    context_object_name = "thread"
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ChatView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(ChatView, self).get_context_data(**kwargs)
+        if self.kwargs.get("deleted", None):
+            threads = Thread.ordered(Thread.deleted(self.request.user))
+            folder = "deleted"
+        else:
+            threads = Thread.ordered(Thread.inbox(self.request.user))
+            folder = "inbox"
+
+        context.update({
+            "folder": folder,
+            "threads": threads,
+            "threads_unread": Thread.ordered(Thread.unread(self.request.user))
+        })
+        return context
+
+
+class ChatUpdateView(UpdateView):
+    """
+    View chat box.
+    """
+    template_name = "pinax/messages/chat_update.html"
+    model = Thread
+    form_class = MessageReplyForm
+    context_object_name = "thread"
+
+    # @method_decorator(login_required)
+    # def dispatch(self, *args, **kwargs):
+    #     return super(ChatView, self).dispatch(*args, **kwargs)
+
+    def get_queryset(self):
+
+        qs = super(ChatUpdateView, self).get_queryset()
+        qs = qs.filter(userthread__user=self.request.user).distinct()
+        return qs
+
+    def get_form_kwargs(self):
+        kwargs = super(ChatUpdateView, self).get_form_kwargs()
+        kwargs.update({
+            "user": self.request.user,
+            "thread": self.object
+        })
+        return kwargs
+
+    def get(self, request, *args, **kwargs):
+        response = super(ChatUpdateView, self).get(request, *args, **kwargs)
+        self.object.userthread_set.filter(user=request.user).update(unread=False)
+        return response
+
+    def post(self, request, *args, **kwargs):
+        content = request.POST.get('content')
+        c = Message(sender=request.user, content=content, thread=Thread.objects.get(id=self.kwargs['pk']))
+        if content != '':
+            c.save()
+        return JsonResponse({'content': content, 'user': self.request.user.username})
+
+    def get_success_url(self):
+        return reverse_lazy("pinax_messages:thread_detail", kwargs={'pk': self.object.thread_id})
+
+    def get_context_data(self, **kwargs):
+        context = super(ChatUpdateView, self).get_context_data(**kwargs)
         if self.kwargs.get("deleted", None):
             threads = Thread.ordered(Thread.deleted(self.request.user))
             folder = "deleted"
@@ -142,7 +235,43 @@ class ThreadDeleteView(DeleteView):
 
 
 #TODO: This needs security check to make sure user has authority to view their own chat.
+@login_required
 def Messages(request):
-    thread_id = request.GET['thread_id']
-    c = Thread.objects.get(id=thread_id)
-    return render(request, 'pinax/messages/snippets/messages.html', {'thread': c})
+    try:
+        thread_id = request.GET.get('thread_id')
+        c = Thread.objects.get(id=thread_id)
+        if request.user in c.users.all():
+            return render(request, 'pinax/messages/snippets/messages.html', {'thread': c})
+        return redirect(reverse('pinax_messages:inbox'))
+    except ObjectDoesNotExist:
+        return redirect(reverse('pinax_messages:inbox'))
+
+
+
+class ThreadAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            return Thread.objects.none()
+
+        qs = Thread.objects.all()
+
+        if self.q:
+            qs = qs.filter(subject__istartswith=self.q)
+
+        return qs
+
+class UserAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        User = get_user_model()
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            return User.objects.none()
+
+        qs = User.objects.all()
+
+        if self.q:
+            qs = qs.filter(username__istartswith=self.q)
+
+        return qs
+

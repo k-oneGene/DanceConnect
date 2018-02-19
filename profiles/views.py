@@ -124,6 +124,14 @@ class MyNotificationsView(TemplateView):
         return context
 
 
+class MyNotificationsBoxView(TemplateView):
+    template_name = 'notifications/notifications_list_box.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MyNotificationsBoxView, self).get_context_data(**kwargs)
+        return context
+
+
 def login_test_view(request):
     # user = authenticate(username='test20', password='qwerty123')
     # print(user)

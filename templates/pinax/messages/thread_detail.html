@@ -14,7 +14,7 @@
         <a class="button" href="{% url "pinax_messages:thread_delete" thread.pk %}">Delete Thread</a>
     </h2>
 
-    <div class="msg_box", id="id_msg_box">
+    <div class="msg_box" id="id_msg_box">
         {% include 'pinax/messages/snippets/messages.html' %}
     </div>
     <form id="chat-form" class="" action="{% url "pinax_messages:thread_detail" thread.pk %}" method="post">
@@ -32,14 +32,6 @@
 {% endblock %}
 
 {% block my_js %}
-{#    Autoscrolls chatbox to bottom #}
-    <script>
-        var chatThread = document.getElementById('id_msg_box');
-        chatThread.scrollTop = chatThread.scrollHeight;
-    </script>
-
-    <script type="text/javascript" src="{% static "js/chat.js" %}"></script>
-
-
+    {% include 'pinax/messages/snippets/js.html' %}
 {% endblock %}
 

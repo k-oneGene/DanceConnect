@@ -14,6 +14,7 @@ from .views import (
     MyPastEventsListView,
     MyFutureEventsListView,
     MyNotificationsView,
+    MyNotificationsBoxView,
     login_test_view
 )
 
@@ -33,7 +34,7 @@ urlpatterns = [
     path('future_events/', MyFutureEventsListView.as_view(), name='my_future'),
 
     path('notifications/', MyNotificationsView.as_view(), name='my_notifications'),
-
+    path('notificationsbox/', MyNotificationsBoxView.as_view(), name='my_notifications_box'),
 ]
 
 

@@ -44,7 +44,7 @@ class Thread(models.Model):
         )
 
     def get_absolute_url(self):
-        return reverse("pinax_messages:thread_detail", args=[self.pk])
+        return reverse("pinax_messages:chat_update", args=[self.pk])
 
     @property
     @cached_attribute

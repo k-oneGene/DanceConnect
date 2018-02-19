@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     /* Scroll on buttons */
 
     $('.js--scroll-to-thisdevsmind').click(function() {
@@ -29,6 +28,29 @@ $(document).ready(function() {
                 }
             }
         });
+    });
+
+
+
+    /* Notification */
+
+    $("#notificationLink").click(function()
+    {
+        $("#notificationContainer").fadeToggle(300);
+        $("#notification_count").fadeOut("slow");
+        return false;
+    });
+
+    //Document Click hiding the popup
+    $(document).click(function()
+    {
+        $("#notificationContainer").hide();
+    });
+
+//Popup on click
+    $("#notificationContainer").click(function()
+    {
+        return false;
     });
 
 });

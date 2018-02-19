@@ -7,6 +7,10 @@ app_name = "pinax_messages"
 urlpatterns = [
     url(r"^inbox/$", views.InboxView.as_view(),
         name="inbox"),
+    url(r"^chat/(?P<pk>\d+)/$", views.ChatUpdateView.as_view(),
+        name="chat_update"),
+    url(r"^chat/$", views.ChatView.as_view(),
+        name="chat"),
     url(r"^create/$", views.MessageCreateView.as_view(),
         name="message_create"),
     url(r"^create/(?P<user_id>\d+)/$", views.MessageCreateView.as_view(),
@@ -17,5 +21,17 @@ urlpatterns = [
         name="thread_delete"),
 
     url(r'^messages/$', views.Messages, name='messages'),
+
+    url(
+        r'^thread-autocomplete/$',
+        views.ThreadAutocomplete.as_view(),
+        name='thread-autocomplete',
+    ),
+
+    url(
+        r'^user-autocomplete/$',
+        views.UserAutocomplete.as_view(),
+        name='user-autocomplete',
+    ),
 
 ]

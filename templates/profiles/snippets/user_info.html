@@ -30,6 +30,7 @@
 <div class="row">
     <div class="col-sm-12 text-left mb-2">
         <a href="{% url 'profiles:detail' pk=profile.id %}" class="btn btn-outline-secondary btn-sm">Details</a>
+        <a href="{% url 'pinax_messages:message_user_create' user_id=profile.user.id %}" class="btn btn-outline-info btn-sm">Message</a>
     </div>
 </div>
 <div class="row ">

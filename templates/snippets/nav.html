@@ -33,6 +33,33 @@
             {% if user.is_authenticated %}
                 {% if user.profile.id %}
                     <li><a href="{% url 'my_home' %}">{{ user.username }}</a></li>
+                    <li><a href="{% url 'profiles:my_notifications_box' %}" id="">N_box</a></li>
+
+
+                    <li id="notification_li">
+                        <span id="notification_count">3</span>
+                        <a href="#" id="notificationLink">Notifications</a>
+                        <div id="notificationContainer">
+                            <div id="notificationTitle">Notifications</div>
+                            <div id="notificationsBody" class="notifications">
+                                <div class="notification-box-list">
+{#                                    <ul>#}
+{#                                        <li>List 1</li>#}
+{#                                        <li>List 2</li>#}
+{#                                        <li>List 3</li>#}
+{#                                    </ul>#}
+                                    {% load notification_tags %}
+{#                                     Loads inition notifications#}
+{#                                    {% user_notifications %}#}
+                                    {# Does Ajax magic #}
+                                    {% include_notify_js_variables %}
+                                </div>
+                            </div>
+                            <div id="notificationFooter"><a href="{% url 'profiles:my_notifications_box' %}">See All</a></div>
+                        </div>
+                    </li>
+
+
                 {% else %}
                     <li><a href="{% url 'profiles:profile' %}"><strong>Add Info</strong></a></li>
                 {% endif %}

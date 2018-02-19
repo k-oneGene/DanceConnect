@@ -13,12 +13,12 @@ var chatSubmitAction = function(event){
             chatThread.scrollTop = chatThread.scrollHeight;
         }
     });
-}
+};
 
 $('#chat-form').on('submit', chatSubmitAction);
 
 function getMessages(){
-    var thread_id, pathname
+    var thread_id, pathname;
     pathname = window.location.pathname;
     thread_id = pathname.split('/')[3];
 
@@ -27,12 +27,10 @@ function getMessages(){
             $('#id_msg_box').html(messages);
             var chatThread = document.getElementById('id_msg_box');
             chatThread.scrollTop = chatThread.scrollHeight;
-
-
         });
     }
     scrolling = false;
-}
+};
 
 var scrolling = false;
 $(function(){

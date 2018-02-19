@@ -1,0 +1,9 @@
+{% load static %}
+
+{#    Autoscrolls chatbox to bottom #}
+<script>
+    var chatThread = document.getElementById('id_msg_box');
+    chatThread.scrollTop = chatThread.scrollHeight;
+</script>
+
+<script type="text/javascript" src="{% static "js/chat.js" %}"></script>
