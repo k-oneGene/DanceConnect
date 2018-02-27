@@ -26,7 +26,7 @@ body {
 .margin {margin-bottom: 45px;}
 .bg-1 {
     /*background-color: #1abc9c; !* Green *!*/
-    /*color: #ffffff;*/
+    color: #ebebeb;
     background-image:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.1)), url("../images/home/main.jpg");
     background-size: cover; /* whole image on screen */
     background-position: center;
@@ -517,7 +517,8 @@ pre {
     overflow-x: hidden;
     padding: 0px;
     margin: 0px;
-    background-color: #7c81c5;
+    /*background-color: #7c81c5;*/
+    background-color: #ededed;
 }
 
 
@@ -526,7 +527,12 @@ pre {
     /*border: 1px solid #3e427d;*/
     /*width: 100%;*/
     margin: 5px;
-    background-color: #44449e;
+    /*background-color: #44449e;*/
+    background-color: #e1e1e1;
+}
+
+.chat_left_thread_highlight {
+    background-color: #c1c1c1;
 }
 
 .chat_left_img {
@@ -578,10 +584,11 @@ pre {
 .chat_right_box {
     /*background-color:pink;*/
     border: 1px solid #e1e1e1;
+    background-color: #ededed;
 }
 
 .chat_msg_box {
-    background-color: #5ca4d7;
+    background-color: #ededed;
     /*border: 1px solid #9fcdff;*/
     height: 50vh;
     overflow-y: auto;
@@ -592,11 +599,11 @@ pre {
     position: absolute;
     width: 100%;
     left: 0;
-
 }
 
 .chat_msg_form_box {
     /*background-color: #5ca4d7;*/
+    background-color: #ededed;
 
     position: absolute;
     width: 100%;
@@ -606,7 +613,8 @@ pre {
 
 .msg_reply_box {
     border: 1px solid #f5edf7;
-    background-color: #f5edf7;
+    /*background-color: #f5edf7;*/
+    /*background-color: #e1e1e1;*/
 
     height: 100px;
     width: 100%;
@@ -649,14 +657,15 @@ pre {
     margin: 5px 25px;
 }
 
-.darker {
-    border-color: #ccc;
-    background-color: #ddd;
-}
+/*.darker {*/
+    /*border-color: #ccc;*/
+    /*background-color: #ddd;*/
+/*}*/
 
 .speech-bubble_me {
     position: relative;
-    background: #15a618;
+    /*background: #15a618;*/
+    background: rgb(171, 212, 211);
     border-radius: .4em;
 }
 
@@ -668,7 +677,8 @@ pre {
     width: 0;
     height: 0;
     border: 20px solid transparent;
-    border-left-color: #15a618;
+    /*border-left-color: #15a618;*/
+    border-left-color: rgb(171, 212, 211);
     border-right: 0;
     border-bottom: 0;
     margin-top: -10px;
@@ -677,7 +687,7 @@ pre {
 
 .speech-bubble {
     position: relative;
-    background: #009fbb;
+    background: #d5e6f1;
     border-radius: .4em;
 }
 
@@ -689,7 +699,7 @@ pre {
     width: 0;
     height: 0;
     border: 20px solid transparent;
-    border-right-color: #009fbb;
+    border-right-color: #d5e6f1;
     border-left: 0;
     border-bottom: 0;
     margin-top: -10px;
@@ -756,7 +766,7 @@ pre {
     position: absolute;
     right: 4rem; /*<-------- Difference*/
     bottom: 2.5rem;
-    z-index: 33;
+    /*z-index: 33;*/
     white-space: nowrap;
     box-shadow: 0px 0px 4px #222;
     /*background-image: linear-gradient(top, #eeeeee, #cccccc);*/
@@ -777,7 +787,7 @@ pre {
     position: absolute;
     left: 4rem; /*<--------Difference*/
     bottom: 3rem;
-    z-index: 33;
+    /*z-index: 33;*/
     white-space: nowrap;
     box-shadow: 0px 0px 4px #222;
     /*background-image: linear-gradient(top, #eeeeee, #cccccc);*/
@@ -796,6 +806,9 @@ pre {
     font-size: 0.7em;
 }
 
+.list-group-item {
+    width: 100%;
+}
 
 
 
@@ -807,7 +820,8 @@ pre {
 /**/
 #notification_li
 {
-    position:relative
+    position:relative;
+    z-index: 3;
 }
 #notificationContainer
 {
@@ -818,10 +832,11 @@ pre {
     overflow: visible;
     position: absolute;
     top: 30px;
-    margin-left: -170px;
+    margin-left: -190px;
     width: 400px;
-    z-index: 333;
     /*box-sizing: border-box;*/
+    font-size: 0.8rem;
+    letter-spacing: initial;
     display: none; // Enable this after jquery implementation
 }
 /*// Popup Arrow*/
@@ -845,7 +860,7 @@ pre {
     background-color: #ffffff;
     /*position: fixed;*/
     position: absolute;
-    z-index: 1000;
+    /*z-index: 99;*/
     width: 384px;
     border-bottom: 1px solid #dddddd;
 }
@@ -853,7 +868,7 @@ pre {
 {
     padding: 33px 0px 0px 0px !important;
     min-height:300px;
-    max-height: 600px;
+    max-height: 70vh;
     overflow-y: scroll;
 }
 #notificationFooter
@@ -864,19 +879,36 @@ pre {
     padding: 8px;
     font-size: 12px;
     border-top: 1px solid #dddddd;
+    /*z-index: 99;*/
 }
 
 #notification_count
 {
     padding: 3px 7px 3px 7px;
     background: #cc0000;
+    opacity: 0.5;
     color: #ffffff;
     font-weight: bold;
-    margin-left: 77px;
-    border-radius: 9px;
-    -moz-border-radius: 9px;
-    -webkit-border-radius: 9px;
+    margin-left: 11px;
+    border-radius: 99px;
     position: absolute;
     margin-top: -11px;
     font-size: 11px;
+}
+
+.read {
+    /*background-color: #5ca4d7;*/
+}
+
+.unread {
+    background-color: #d1ecf1;
+}
+
+
+notification-box-list. {
+
+}
+
+.notification {
+
 }

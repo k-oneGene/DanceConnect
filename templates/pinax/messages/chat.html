@@ -64,7 +64,7 @@
 {#                 action="{{thread.get_absolute_url}}" method="post" #}
             <form id="chat-form" class="chat_msg_form_box">
                 {% csrf_token %}
-                <textarea class="msg_reply_box"></textarea>
+                <textarea class="msg_reply_box" placeholder="Type a message..."></textarea>
                 <button class="btn btn-info float-right m-1" id="">Send</button>
             </form>
             </div>

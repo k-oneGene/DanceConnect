@@ -133,7 +133,8 @@ class ChatUpdateView(UpdateView):
         context.update({
             "folder": folder,
             "threads": threads,
-            "threads_unread": Thread.ordered(Thread.unread(self.request.user))
+            "threads_unread": Thread.ordered(Thread.unread(self.request.user)),
+            "current_chat_id": int(self.kwargs['pk'])
         })
         return context
 

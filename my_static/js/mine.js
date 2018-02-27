@@ -48,9 +48,19 @@ $(document).ready(function() {
     });
 
 //Popup on click
-    $("#notificationContainer").click(function()
+    // This stops box from closing when clicking. But also stops hrefs being clickable.
+    $("#notificationContainer").click(function(event)
     {
-        return false;
-    });
+        // event.preventDefault();
+        // event.stopPropagation();
 
+        // return false;
+    });
+// but Footer can be clicked
+    $("#notificationFooter").click(function()
+    {
+        var url = window.location;
+        window.location.replace(url.origin + "/profiles/notificationsbox/"); //todo temp solution
+        return true;
+    });
 });

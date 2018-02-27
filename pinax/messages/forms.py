@@ -46,7 +46,7 @@ class NewMessageForm(forms.ModelForm):
     )
     content = forms.CharField(widget=forms.Textarea)
     # to_user = UserModelChoiceField(queryset=get_user_model().objects.none()) # original implementation. Maybe del.
-    threadTopics = forms.ModelChoiceField(queryset=Thread.objects.all(), widget=autocomplete.ModelSelect2(url='pinax_messages:thread-autocomplete')) # used to learn
+    # threadTopics = forms.ModelChoiceField(queryset=Thread.objects.all(), widget=autocomplete.ModelSelect2(url='pinax_messages:thread-autocomplete')) # used to learn
 
 
     def __init__(self, *args, **kwargs):
