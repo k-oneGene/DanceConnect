@@ -27,7 +27,7 @@ var chatSubmitAction = function(event){
                 $('#id_content').val('');
             }
         });
-    };
+    }
 };
 
 $('#chat-form').on('submit', chatSubmitAction);
@@ -56,27 +56,44 @@ $(function(){
 });
 
 $(document).ready(function() {
-     $('#send').attr('disabled','disabled');
-     $('#id_content').keyup(function() {
-        if($(this).val() != '') {
-           $('#send').removeAttr('disabled');
+
+    $('#send').attr('disabled','disabled');
+    $('#id_content').keyup(function(event) {
+        if($(this).val().length > 0) {
+            $('#send').removeAttr('disabled');
+        } else if (event.shiftKey && event.keyCode == 13) {
+            var content = this.value;
+            // var caret = getCaret(this);
+            //
+            // console.log('content, caret');
+            // console.log(content);
+            // console.log(caret);
+            //
+            // this.value = content.substring(0, caret) + "\n" + content.substring(caret, content.length - 1);
+            // event.stopPropagation();
+        } else {
+            $('#send').attr('disabled','disabled');
         }
-        else {
-        $('#send').attr('disabled','disabled');
-        }
-     });
- });
+    });
+});
 
 // Allow multiple line in msg_reply_box(textarea) box
 $('#id_content').keyup(function (event) {
     if (event.shiftKey && event.keyCode == 13) {
         var content = this.value;
         var caret = getCaret(this);
-        this.value = content.substring(0, caret) + "\n" + content.substring(caret, content.length - 1);
+
+        // console.log('content, caret');
+        // console.log(content);
+        // console.log(caret);
+
+        // this.value = content.substring(0, caret) + "\n" + content.substring(caret, content.length - 1);
+        this.value = content.substring(0, caret);
         event.stopPropagation();
-    } else if (event.keyCode == 13) {
-        $('#chat-form').submit();
     }
+    // else if (event.keyCode == 13) {
+    //     $('#chat-form').submit();
+    // }
 });
 
 

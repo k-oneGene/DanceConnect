@@ -67,6 +67,8 @@ class Thread(models.Model):
         return objs
 
 
+
+
 class UserThread(models.Model):
 
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE)

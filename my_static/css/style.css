@@ -512,7 +512,8 @@ pre {
 .chat_left_box {
     border: 1px solid #e1e1e1;
     white-space: nowrap;
-    height: 75vh;
+    height: 600px;
+    /*height: 75vh;*/
     overflow-y: auto;
     overflow-x: hidden;
     padding: 0px;
@@ -581,6 +582,24 @@ pre {
     text-overflow: ellipsis;
 }
 
+@media only screen and (max-width: 992px) {
+    .chat_left_thread .chat_disable_md {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .chat_left_box .chat_left_thread img {
+        display: block; !important;
+        margin-right: auto !important;
+        margin-left: auto !important;
+    }
+    .chat_left_thread .chat_disable_sm {
+        display: none;
+    }
+
+}
+
 .chat_right_box {
     /*background-color:pink;*/
     border: 1px solid #e1e1e1;
@@ -590,7 +609,7 @@ pre {
 .chat_msg_box {
     background-color: #ededed;
     /*border: 1px solid #9fcdff;*/
-    height: 50vh;
+    height: 470px;
     overflow-y: auto;
     /*padding: 0px;*/
     /*margin: 0px;*/
@@ -616,10 +635,16 @@ pre {
     /*background-color: #f5edf7;*/
     /*background-color: #e1e1e1;*/
 
-    height: 100px;
+    height: 80px;
     width: 100%;
     padding: 0px;
     margin: 0px;
+}
+
+#send {
+    margin: 0px 5px 5px 0px;
+    padding: 2px 5px 2px 5px;
+
 }
 
 /* Messages Thread */
@@ -653,7 +678,7 @@ pre {
     /*border: 2px solid #dedede;*/
     background-color: #f1f1f1;
     border-radius: 5px;
-    padding: 10px;
+    padding: 3px;
     margin: 5px 25px;
 }
 
@@ -795,6 +820,20 @@ pre {
     border-radius: 25px;
     background-color: #1abc9c;
 }
+
+.message-pre {
+    font-size: inherit;
+    color: inherit;
+    border: initial;
+    font-family: inherit;
+    padding: 0;
+    margin: 0;
+    word-break: break-all;
+    /*white-space: pre-line;*/
+}
+
+
+
 
 /*****************/
 /* Notifications */

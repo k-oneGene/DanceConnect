@@ -1,0 +1,64 @@
+{% extends "pinax/base.html" %}
+​
+{% load i18n %}
+{% load pinax_messages_tags %}
+{% load static %}
+{% load humanize %}
+{% load widget_tweaks %}
+
+​
+{% block head_title %}Chat{% endblock %}
+​
+{% block content_msg %}
+    <div class="container event_main_bg">
+        <h1 class="text-center">Chat</h1>
+        <div class="row">
+            <div class="col-md-4 col-2 chat_left_box">
+                {% for thread in threads %}
+                    <div class="chat_left_thread {% if thread.id == current_chat_id %}chat_left_thread_highlight{% endif %}">
+                        <a href="{{thread.get_absolute_url}}">
+                            <div class="row align-items-center">
+                                <div class="col-lg-2 col-md-3 col-sm-12">
+                                    <div class="">
+                                        {% if thread.users.last.profile.image %}
+                                            <img class="rounded-circle ml-1" src="{% get_thread_image thread request.user %}" width="50" height="50">
+                                        {% else %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 col-md-9 chat_disable_sm">
+                                    <div class="">
+                                        {#                                        {{ thread.users.all|join:", " }}#}
+                                        <div class="names chat_disable_md">
+                                            {% with t_users=thread.users.all %}
+                                                {% for u in t_users %}
+                                                    {% if u != user %}
+                                                        {{ u }}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endwith %}
+                                            <span class="time float-right mr-1 ">Time: {{ thread.first_message.sent_at|naturaltime }}</span>
+                                        </div>
+                                        <div class="subject ">{{ thread.subject }}</div>
+                                        <div class="content ">{{ thread.latest_message.content }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    {#                    {% filter capfirst%} {{thread.users.all|join:', '}} {% endfilter %}#}
+                {% endfor %}
+            </div>
+
+            <div class="col-md-8 col-10 chat_right_box">
+                    {% block chat_form %}
+                    {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block my_js %}
+    {% include 'pinax/messages/snippets/js.html' %}
+{% endblock %}

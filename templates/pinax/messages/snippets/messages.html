@@ -4,7 +4,7 @@
             <div class="d-flex flex-row-reverse px-2 chat_container speech-bubble_me">
                 <div class="d-flex flex-column px-2">
                     <div class="message-content " title="{{ message.sent_at }}">
-                        {{ message.content|urlize }}
+                        <pre class="message-pre">{{ message.content|urlize }}</pre>
                     </div>
                 </div>
             </div>
@@ -14,7 +14,9 @@
                 <div class="d-flex flex-column px-2">
                     <div class="message-from">{{ message.sender.username }}</div>
 {#                    <div class="message-sent">{{ message.sent_at }}</div>#}
-                    <div class="message-content_r" title="{{ message.sent_at }}">{{ message.content|urlize }}</div>
+                    <div class="message-content_r" title="{{ message.sent_at }}">
+                        <pre class="message-pre">{{ message.content|urlize }}</pre>
+                    </div>
                 </div>
             </div>
         {% endif %}
