@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     /* Scroll on buttons */
 
     $('.js--scroll-to-thisdevsmind').click(function() {
@@ -31,4 +30,37 @@ $(document).ready(function() {
         });
     });
 
+
+
+    /* Notification */
+
+    $("#notificationLink").click(function()
+    {
+        $("#notificationContainer").fadeToggle(300);
+        $("#notification_count").fadeOut("slow");
+        return false;
+    });
+
+    //Document Click hiding the popup
+    $(document).click(function()
+    {
+        $("#notificationContainer").hide();
+    });
+
+//Popup on click
+    // This stops box from closing when clicking. But also stops hrefs being clickable.
+    $("#notificationContainer").click(function(event)
+    {
+        // event.preventDefault();
+        // event.stopPropagation();
+
+        // return false;
+    });
+// but Footer can be clicked
+    $("#notificationFooter").click(function()
+    {
+        var url = window.location;
+        window.location.replace(url.origin + "/profiles/notificationsbox/"); //todo temp solution
+        return true;
+    });
 });
