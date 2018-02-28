@@ -1,5 +1,9 @@
 {% load static %}
 
+{% load i18n %}
+{% load notification_tags %}
+
+
 <nav class="navbar navbar-light navbar-expand-md">
     <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">Dance
@@ -11,11 +15,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav ml-auto">
-                <li><a href='{% url 'search:festivals' %}'>Festivals</a></li>
-                <li><a href='{% url 'events:category' %}'>Dances</a></li>
-                <li><a href='{% url 'events:list' %}'>Events</a></li>
-                <li><a href='{% url 'profiles:list' %}'>Users</a></li>
-                <li><a href='{% url 'search:home' %}'>Search</a></li>
+{#                <li><a href='{% url 'search:festivals' %}'>Festivals</a></li>#}
+{#                <li><a href='{% url 'events:category' %}'>Dances</a></li>#}
+{#                <li><a href='{% url 'events:list' %}'>Events</a></li>#}
+                <li class="nav-item"><a class="nav-link" href='{% url 'profiles:list' %}'>Users</a></li>
+                <li class="nav-item"><a class="nav-link" href='{% url 'search:home' %}'>Search</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Find Events
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'search:festivals' %}">Festivals</a>
+                        <a class="dropdown-item" href="{% url 'events:category' %}">Dances</a>
+                        <a class="dropdown-item" href="{% url 'events:list' %}">Events</a>
+                    </div>
+                </li>
             </ul>
 
             {% if user.is_authenticated and user.profile.id %}
@@ -36,16 +50,31 @@
             {% if user.is_authenticated %}
                 {% if user.profile.id %}
                     <li><a href="{% url 'my_home' %}">{{ user.username }}</a></li>
+                    <li>
+                        <a class="" href="{% url 'pinax_messages:chat' %}">
+                            <i class="fas fa-comment fa-lg"></i></a>
+                    </li>
 {#                    <li><a href="{% url 'profiles:my_notifications_box' %}" id="">N_box</a></li>#}
 
                     <li id="notification_li">
+                    {% if user.notifications.unread.count %}
                         <span id="notification_count">{{ user.notifications.unread.count }}</span>
+                    {% endif %}
                         <a href="#" id="notificationLink"><i class="fas fa-bell fa-lg" style="font-size: large;"></i></a>
                         <div id="notificationContainer">
-                            <div id="notificationTitle">Notifications</div>
+                            <div id="notificationTitle">
+{#                                Using "data-mark-action" of built in solution is way easier then method I was trying to use before#}
+{#                                <form class="form-inline" method="POST" action="{% url 'notifications:mark_all' %}">#}
+{#                                    {% csrf_token %}#}
+{#                                    <input type="hidden" name="action" value="read">#}
+{#                                    <button type="submit" class="btn btn-sm btn-link">Mark all read</button>#}
+{#                                </form>#}
+                                Notifications
+                                <button class="mark-all-notifications btn btn-sm btn-link" data-mark-action="read">{% trans "Mark all as read" %}</button>
+                            </div>
+
                             <div id="notificationsBody" class="notifications">
                                 <div class="notification-box-list">
-                                    {% load notification_tags %}
 {#                                     Loads inition notifications#}
 {#                                    {% user_notifications %}#}
                                     {# Does Ajax magic #}

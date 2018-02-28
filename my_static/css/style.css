@@ -91,6 +91,10 @@ body {
     color: #1abc9c !important;
 }
 
+.navbar-light .navbar-nav .nav-link {
+    color: #777777;
+}
+
 
 /* Carousel */
 

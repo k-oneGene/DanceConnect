@@ -170,7 +170,6 @@ class ThreadView(UpdateView):
         self.object.userthread_set.filter(user=request.user).update(unread=False)
         return response
 
-
     def post(self, request, *args, **kwargs):
         content = request.POST.get('content')
         c = Message(sender=request.user, content=content, thread=Thread.objects.get(id=self.kwargs['pk']))
@@ -240,13 +239,15 @@ class ThreadDeleteView(DeleteView):
 def Messages(request):
     try:
         thread_id = request.GET.get('thread_id')
+        if not len(thread_id):
+            return render(request, 'pinax/messages/snippets/messages.html')
         c = Thread.objects.get(id=thread_id)
         if request.user in c.users.all():
             return render(request, 'pinax/messages/snippets/messages.html', {'thread': c})
-        return redirect(reverse('pinax_messages:inbox'))
+        # return redirect(reverse('pinax_messages:chat'))
     except ObjectDoesNotExist:
-        return redirect(reverse('pinax_messages:inbox'))
-
+        # return redirect(reverse('pinax_messages:chat'))
+        pass
 
 
 class ThreadAutocomplete(autocomplete.Select2QuerySetView):
@@ -261,6 +262,7 @@ class ThreadAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(subject__istartswith=self.q)
 
         return qs
+
 
 class UserAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
