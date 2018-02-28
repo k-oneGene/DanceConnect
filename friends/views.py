@@ -11,6 +11,7 @@ from notify.signals import notify
 
 from profiles.models import Profile
 from friends.models import Friend
+from pinax.messages.models import Message, Thread
 # Create your views here.
 
 
@@ -71,9 +72,13 @@ class Friend_Accept(LoginRequiredMixin, View):
 
         # Notify friend request sender
         notify.send(to_user, recipient=from_user, actor=to_user, verb=' has accepted friendship request.', nf_type='friends_all')
-
         # Notify yourself
         notify.send(from_user, recipient=to_user, actor=from_user, verb=' accepted ', nf_type='friends_accept_self')
+
+        # If no message between two people exist create empty chat
+        # Or I can use q7 = q1.intersection(q2)
+        if not Thread.objects.filter(users=from_user).filter(users=to_user).exists():
+            Message.new_message(from_user=from_user, to_users=[to_user], subject='', content='')
 
         next = request.session.get('next')
         return HttpResponseRedirect(next)

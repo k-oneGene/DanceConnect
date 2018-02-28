@@ -12,13 +12,5 @@
     {% endif %}
     <span class="timesince">{% blocktrans with created=notification.created|timesince %}{{created}} ago{% endblocktrans %}</span>
 {% endblock notification %}
-    <button data-id="{{ notification.id }}" class="mark-notification"
-            data-mark-action="{{ notification.read|yesno:'unread,read' }}"
-            data-toggle-text="{% blocktrans with read=notification.read|yesno:_('read,unread') %}Mark as {{ read }}{% endblocktrans %}">
-        {% blocktrans with read=notification.read|yesno:_('unread,read') %}Mark as {{ read }}{% endblocktrans %}
-    </button>
-
-    <button class="delete-notification" data-id="{{ notification.id }}">
-        X
-    </button>
+    {% include 'notifications/includes/snippets/read_unread_box_btns.html' %}
 </li>

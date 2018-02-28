@@ -2,7 +2,7 @@
 {#<p style="color: rebeccapurple">This is friends_all_box.html</p>#}
 <li data-nf-id="{{ notification.id }}"
     class="notification list-group-item {{ notification.read|yesno:'read,unread' }}">
-    <a><img class="rounded-circle mr-1" src="{{ notification.actor.profile.image.url }}" width="40" height="40"></a>
+    <a href="{{ notification.actor_url }}"><img class="rounded-circle mr-1" src="{{ notification.actor.profile.image.url }}" width="40" height="40"></a>
     <a href="{{ notification.actor_url }}">{{ notification.actor }}</a> {{ notification.verb }}
     <span class="timesince">{{ notification.created|timesince }} ago</span>
 
