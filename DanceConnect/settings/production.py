@@ -23,8 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 SECRET_KEY = os.environ.get('SECRET_KEY', 'SOME+RANDOM+KEY(z9+3vnm(jb0u@&w68t#5_e8s9-lbfhv-')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-DEBUG = os.environ.get('DEBUG', False)
+DEBUG = False
+# DEBUG = os.environ.get('DEBUG', False)
 
 ALLOWED_HOSTS = ['danceconnect.herokuapp.com', 'danceconnect2.herokuapp.com']
 
