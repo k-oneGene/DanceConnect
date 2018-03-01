@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'SOME+RANDOM+KEY(z9+3vnm(jb0u@&w68t#5_
 # DEBUG = False
 DEBUG = os.environ.get('DEBUG', False)
 
-ALLOWED_HOSTS = ['danceconnect.herokuapp.com']
+ALLOWED_HOSTS = ['danceconnect.herokuapp.com', 'danceconnect2.herokuapp.com']
 
 
 # Application definition
