@@ -36,7 +36,7 @@ class SignUpCreateView(CreateView):
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
-            return redirect(reverse('profiles:list'))
+            return redirect(reverse('search:profiles'))
         return super(SignUpCreateView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
@@ -51,7 +51,7 @@ class SignUpCreateView(CreateView):
 class SignUpProfileCreateView(LoginRequiredMixin, CreateView):
     form_class = ProfileForm
     template_name = 'registration/signup_profile.html'
-    success_url = reverse_lazy('profiles:list')
+    success_url = reverse_lazy('search:profiles')
 
     def form_valid(self, form):
         instance = form.save(commit=False)
@@ -94,6 +94,11 @@ class ProfileDetailView(DetailView):
         # I requested to this person
         context['me_to_friend'] = Friend.objects.filter(Q(to_user=profile.user) & Q(from_user=self.request.user)).first()
         return context
+
+
+    # profiles:settings
+class ProfileSettingsView(LoginRequiredMixin, TemplateView):
+    template_name = 'profiles/settings.html'
 
 
 class MyPastEventsListView(ListView):

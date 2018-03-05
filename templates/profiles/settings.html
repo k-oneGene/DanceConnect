@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head_title %} {{ block.super }} Profiles {% endblock %}
+
+<!-- Navbar -->
+{% block navbar %}{% include 'snippets/nav.html' %} <br> {% include 'snippets/nav_myhome.html' %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid event_main_bg py-4">
+    <div class="text-center">
+        <h1 class=""> Settings </h1>
+        <a class="nav-item nav-link" href="{% url 'profiles:update'%}">Edit Profile</a>
+        <a class="nav-item nav-link" href="{% url 'profiles:password_change'%}">Change Password</a>
+    </div>
+</div>
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock %}
+
+</body>
+</html>

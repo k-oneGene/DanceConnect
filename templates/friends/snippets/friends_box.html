@@ -32,9 +32,10 @@
         <a href="{% url 'profiles:detail' pk=profile.id %}" class="btn btn-outline-secondary btn-sm">Details</a>
     </div>
 </div>
-<div class="row">
-    {% include 'friends/snippets/friend_button.html' %}
-</div>
+{#TODO: Disabled for now but redo logic. Issue at mo is getting me_tofriend, friend_to_me query. Can not do in template so I need to pass list or template from listview?#}
+{#<div class="row mx-0">#}
+{#    {% include 'friends/snippets/friend_button.html' %}#}
+{#</div>#}
 <div class="row ">
     <div class="col-sm-12">
         <pre> {{ profile.bio }}</pre>

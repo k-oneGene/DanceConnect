@@ -5,6 +5,7 @@ from .views import (
     SearchHomeView,
     SearchEventsListview,
     SearchProfilesListview,
+    SearchTeachersListview,
     AdvanceSearchEventsListView,
     SearchFestivalsListView,
     AdvanceSearchFestivalsListView
@@ -19,5 +20,6 @@ urlpatterns = [
     path('festivals/', SearchFestivalsListView.as_view(), name="festivals"),
     path('festivals-advance/', AdvanceSearchFestivalsListView.as_view(), name="festivals-advance"),
     path('profiles/', SearchProfilesListview.as_view(), name="profiles"),
+    path('teachers/', SearchTeachersListview.as_view(), name="teachers"),
 ]
 

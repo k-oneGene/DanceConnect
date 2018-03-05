@@ -205,3 +205,31 @@ class SearchProfilesListview(ListView):
         context['page_obj'] = page_obj
 
         return context
+
+class SearchTeachersListview(ListView):
+    model = Profile
+    template_name = 'search/searchteachers_list.html'
+    paginate_by = 9
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(SearchTeachersListview, self).get_context_data(*args, **kwargs)
+        query = self.request.GET.get('q')
+        qs = Profile.objects.filter(teacher=True) # Profile.objects.all(), but ListView auto does this.
+        if query:
+            qs = qs.search(query)
+        context['object_list'] = qs
+
+        paginator = Paginator(qs, self.paginate_by)
+        page = self.request.GET.get('page')
+        try:
+            page_obj = paginator.page(page)
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)
+        context['object_list'] = page_obj
+        context['paginator'] = paginator
+        context['page_obj'] = page_obj
+
+        return context
+

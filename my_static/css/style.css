@@ -291,6 +291,23 @@ footer p {
 
 
 /**************/
+/* My_Home */
+/**************/
+
+.home_bg_1 {
+    background-color: #ffffff; /* White */
+    color: #555555;
+    font-size: 1em;
+}
+
+.home_bg_2 {
+    background-color: #f4f4f4; /* White */
+    color: #555555;
+    font-size: small;
+}
+
+
+/**************/
 /* Event_list */
 /**************/
 

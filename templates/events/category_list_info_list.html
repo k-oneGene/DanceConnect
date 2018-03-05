@@ -38,7 +38,7 @@
             {% endfor %}
         </div>
         <div class="row justify-content-center">
-            <a href='{% url 'events:list' %}'>Find more events</a>
+            <a href='{% url 'search:events-advance' %}?q_event=&q_date=&q_location=&categories={{ category.pk }}'>Find more {{ category.name|lower }} events</a>
         </div>
     </div>
 
@@ -54,7 +54,7 @@
             {% endfor %}
         </div>
         <div class="row justify-content-center">
-            <a href='{% url 'profiles:list' %}'>Find more users</a>
+            <a href='{% url 'search:profiles' %}'>Find more users</a>
         </div>
     </div>
 

@@ -15,7 +15,7 @@
         <div class="container-fluid bg-1 text-center">
 
             <h3 class="">Welcome to Dance <img class="" src="{% static 'images/logo3.png' %}" width="30" height="30"> Connect</h3>
-            <h4>Where dancers to find events and each other</h4>
+            <h4>Where dancers gather to find events and each other</h4>
 
         </div>
     </section>
@@ -65,7 +65,8 @@
                 {% endfor %}
             </div>
             <div class="row justify-content-center">
-                <a href='{% url 'profiles:list' %}'>Find more users</a>
+{#                <a href='{% url 'search:profiles' %}'>Find more users</a>#}
+                <a href='{% url 'search:profiles' %}'>Find more users</a>
             </div>
         </div>
     </section>
@@ -83,7 +84,7 @@
                 {% endfor %}
             </div>
             <div class="row justify-content-center">
-                <a href='{% url 'profiles:list' %}'>Find more teachers</a>
+                <a href='{% url 'search:teachers' %}'>Find more teachers</a>
             </div>
         </div>
     </section>

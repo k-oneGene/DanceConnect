@@ -2,6 +2,7 @@
     <form class="going_form" method="POST" action='{% url "events:going" %}'> {% csrf_token %}
         <input type="hidden" name="next" value="{{ request.path }}">
         <input type="hidden" name="eventID" value="{{ eventID }}">
+        <input type="hidden" name="to_user" value="{{ profile.user.pk }}">
 {#        {{ profile.get_my_requests }}#}
 {#        {{profile.get_friend_requested}}#}
 {#        {{ friend }}#}
@@ -13,22 +14,24 @@
 {#            {% endif %}#}
 {#        {% endfor %}#}
 {#    <hr>#}
-        {% if friend in profile.get_friend_requested %}
-            <button class="btn btn-secondary btn-sm">Request sent</button>
-        {% elif friend.status == 'friend' %}
-            <button class="btn btn-secondary btn-sm">Unfriend</button>
-        {% elif friend.status == 'requested' %}
-            <button class="btn btn-secondary btn-sm">Accept</button>
-            <button class="btn btn-secondary btn-sm">Remove</button>
-        {% elif friend.status == 'blocked' %}
-        {% else %}
-            <button class="btn btn-secondary btn-sm">Add Friend</button>
-        {% endif %}
 
-        {% if friend.status == 'blocked' %}
-            <button class="btn btn-secondary btn-sm">Unblock</button>
-        {% else %}
-            <button class="btn btn-secondary btn-sm">Block</button>
-        {% endif %}
-            </form>
+
+    {% if friend in profile.get_friend_requested %}
+        <button class="btn btn-secondary btn-sm">Request sent</button>
+    {% elif friend.status == 'friend' %}
+        <button class="btn btn-secondary btn-sm">Unfriend</button>
+    {% elif friend.status == 'requested' %}
+        <button class="btn btn-secondary btn-sm">Accept</button>
+        <button class="btn btn-secondary btn-sm">Remove</button>
+    {% elif friend.status == 'blocked' %}
+    {% else %}
+        <button class="btn btn-secondary btn-sm">Add Friend</button>
+    {% endif %}
+
+    {% if friend.status == 'blocked' %}
+        <button class="btn btn-secondary btn-sm">Unblock</button>
+    {% else %}
+        <button class="btn btn-secondary btn-sm">Block</button>
+    {% endif %}
+        </form>
 {% endif %}
