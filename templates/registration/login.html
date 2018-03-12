@@ -14,7 +14,8 @@
         </form>
         <br>
         <div class="text-center">
-            <a href="{% url 'social:begin' 'facebook' %}"><i class="fa fa-facebook-official fa-lg"></i> Login with facebook</a>
+{#            <a href="{% url 'social:begin' 'facebook' %}"><i class="fa fa-facebook-official fa-lg"></i> Login with facebook</a>#}
+            <a href="{% url 'social:begin' 'facebook' %}"><i class="fab fa-facebook-square"></i> Login with facebook</a>
             <hr>
             Don't have an account? <a href="{% url 'profiles:signup' %}">Sign up</a><br>
             <a href="{% url 'profiles:password_reset' %}">Forgot password?</a>
