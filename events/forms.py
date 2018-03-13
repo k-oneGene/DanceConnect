@@ -17,6 +17,7 @@ class EventForm(forms.ModelForm):
                 'start',
                 'end',
                 'image',
+                'video',
         ]
         widgets = {
             'categories': CheckboxSelectMultiple(),

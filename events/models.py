@@ -3,6 +3,7 @@ from django.conf import settings
 from django.db.models import Q
 from django.db.models.signals import pre_save
 from django.core.files.storage import FileSystemStorage
+from django.core.exceptions import ValidationError
 import os
 
 from .utils import unique_slug_generator
@@ -23,6 +24,13 @@ def category_name_path(instance, filename):
     name, file_extension = os.path.splitext(filename)
     new_filename = str(instance.id) + file_extension
     return os.path.join(path, new_filename)
+
+
+def validate_file_extension(value):
+    ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
+    valid_extensions = ['.mp4', '.ogg']
+    if not ext.lower() in valid_extensions:
+        raise ValidationError(u'Unsupported file extension.')
 
 
 class OverwriteStorage(FileSystemStorage):
@@ -76,8 +84,9 @@ class Event(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField() # todo: need validation to check start/end is smaller/bigger
     image = models.ImageField(upload_to=event_name_path, blank=True, null=True)
+    video = models.FileField(upload_to='video', blank=True, null=True, validators=[validate_file_extension])
 
-    vender = models.ForeignKey(Vender, models.CASCADE, related_name='events')
+    vender = models.ForeignKey(Vender, models.CASCADE, related_name='events', blank=True, null=True)
 
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

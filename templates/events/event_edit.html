@@ -67,6 +67,12 @@
                     {% render_field form.image class="" %}
                 </div>
 
+                <div class="form-group">
+                    {{ form.video.label_tag }}
+                    {{ form.video.errors }}
+                    {% render_field form.video class="" %}
+                </div>
+
                 <div class="text-center">
                     <button type="submit" class="btn btn-warning">Confirm</button>
                     <a href="{% url 'search:events-advance' %}" class="ml-2">Clear</a>
