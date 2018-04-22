@@ -52,7 +52,7 @@ $(function(){
     $('#id_msg_box').on('scroll', function(){
         scrolling = true;
     });
-    refreshTimer = setInterval(getMessages, 5000);
+    refreshTimer = setInterval(getMessages, 1000);
 });
 
 $(document).ready(function() {

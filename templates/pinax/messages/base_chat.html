@@ -52,8 +52,14 @@
             </div>
 
             <div class="col-md-8 col-10 chat_right_box">
-                    {% block chat_form %}
-                    {% endblock %}
+                {% if threads_count == 0 %}
+                    <div class="text-center mt-5">
+                        Chat seems to be empty.
+                        <a class="nav-item nav-link" href="{% url 'pinax_messages:message_create' %}"><i class="far fa-envelope"></i> {% trans "Start a chat with..." %}</a>
+                    </div>
+                {% endif %}
+                {% block chat_form %}
+                {% endblock %}
             </div>
         </div>
     </div>

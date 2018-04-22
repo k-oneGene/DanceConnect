@@ -74,6 +74,7 @@ class ChatView(TemplateView):
         context.update({
             "folder": folder,
             "threads": threads,
+            "threads_count": len(threads),
             "threads_unread": Thread.ordered(Thread.unread(self.request.user))
         })
         return context

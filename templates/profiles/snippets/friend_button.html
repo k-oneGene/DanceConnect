@@ -22,6 +22,9 @@
         {% else %}
             <button name="block_action" class="btn btn-secondary btn-sm" value="block">Block</button>
         {% endif %}
+
+        <a href="{% url 'pinax_messages:message_user_create' user_id=profile.user.id %}" class="btn btn-outline-info btn-sm ml-2">Message</a>
+
     </form>
 
 {% endif %}
