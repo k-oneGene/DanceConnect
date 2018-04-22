@@ -7,10 +7,18 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 
+from django.conf import settings
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+import stripe
+
+
 
 from .models import Event, Category
 from .forms import EventForm
 from profiles.models import Profile
+
+stripe.api_key = settings.STRIPE_SECRET
 
 # Create your views here.
 
@@ -29,6 +37,7 @@ class EventListView(ListView):
     #     return context
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class EventDetailView(DetailView):
     model = Event
 
@@ -53,12 +62,41 @@ class EventDetailView(DetailView):
 
         user = self.request.user
         event = self.get_object()
+        print(user)
 
         context['has_paid'] = False
-        if user.transactionpl.filter(event=event).exists():
-            context['has_paid'] = True
+        context['strip_pub_key'] = settings.STRIPE_PUBLISHABLE
+        if user.is_authenticated:
+            if user.transactionpl.filter(event=event).exists():
+                context['has_paid'] = True
         return context
 
+    def post(self, request, *args, **kwargs):
+        # form = self.form_class(request.POST)
+        print('post triggered')
+        print(request.POST)
+        try:
+            customer = stripe.Charge.create(
+                amount = 300,
+                currency = 'gbp',
+                description = request.POST['stripeEmail'],
+                source = request.POST['stripeToken']
+            )
+            print(customer)
+            return redirect(reverse('events:detail', kwargs={'pk':self.kwargs['pk']}))
+        except stripe.InvalidRequestError:
+            print('some stripe error has occurred: stripe.InvalidRequestError')
+            print('Did you refresh and send same POST?')
+            return redirect(reverse('events:detail', kwargs={'pk':self.kwargs['pk']}))
+        except stripe.CardError:
+            print('some stripe error has occurred: stripe.CardError')
+            return redirect(reverse('events:detail', kwargs={'pk':self.kwargs['pk']}))
+
+
+
+"""
+<QueryDict: {'stripeToken': ['tok_1C5XTAJr2IYImurE44exu8nC'], 'stripeTokenType': ['card'], 'stripeEmail': ['qw@eqwe.com']}>
+"""
 
 class EventCreateView(LoginRequiredMixin, CreateView):
     form_class = EventForm
@@ -124,7 +162,7 @@ class CategoryListInfoListView(DetailView):
         context = super(CategoryListInfoListView, self).get_context_data(**kwargs)
         category = self.get_object()
         context['events_list'] = Event.objects.filter(categories=category).order_by('-start')
-        context['profiles_list'] = Profile.objects.filter(teacher=True,teacher_categories=category)
+        context['profiles_list'] = Profile.objects.filter(teacher=True, teacher_categories=category)
         return context
 
 
@@ -141,5 +179,4 @@ class EventGoingToggle(LoginRequiredMixin, View):
 
 
 # return redirect(reverse("events:detail", kwargs={'pk': event_.id})) #redirect(f"{profile_.user.username}/")
-
 

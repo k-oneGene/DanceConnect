@@ -84,6 +84,23 @@
                                 {% include 'events/snippets/temp_buy_now_multi.html' %}
                             {% endif %}
                         </div>
+                        <hr>
+                        <div>
+                            <p>strip test</p>
+                            <p>{{ strip_pub_key }}</p>
+                            <form action="" method="POST">
+                                <script
+                                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                        data-key="{{ strip_pub_key }}"
+                                        data-amount="{{ event.payment.pricing.all.0.amount_stripe }}"
+                                        data-name="Demo Site"
+                                        data-description="Example charge"
+                                        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                        data-locale="auto"
+                                        data-currency="gbp">
+                                </script>
+                            </form>
+                        </div>
                     {% endif %}
                     <hr>
                     <div class="row">

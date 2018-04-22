@@ -35,6 +35,11 @@ class Pricing(models.Model):
     def __str__(self):
         return f'{self.payment.event} - {self.title}: {self.amount}'
 
+    def amount_stripe(self):
+        print(type(self.amount))
+        print(float(self.amount) * 100)
+        return float(self.amount) * 100
+
 
 class TransactionPaypal(models.Model):
     # info about me

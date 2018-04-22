@@ -18,7 +18,8 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['events_list'] = Event.objects.filter(type__exact='event').order_by('-start')[0:4]
-        context['profiles_list'] = Profile.objects.order_by('-user__date_joined')[0:4]
+        #TODO: Temporarily filtering teachers to make it look better for demo.
+        context['profiles_list'] = Profile.objects.filter(teacher=False).order_by('-user__date_joined')[0:4]
         context['festivals_list'] = Event.objects.filter(type__exact='festival').order_by('-start')[0:4]
         context['teachers_list'] = Profile.objects.filter(teacher=True).order_by('-user__date_joined')[0:4]
         return context

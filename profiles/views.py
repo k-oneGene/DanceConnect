@@ -90,9 +90,10 @@ class ProfileDetailView(DetailView):
         # notify.send(self.request.user, recipient=self.request.user, actor=self.request.user, verb='testing YEEEH.', nf_type='followed_user')
 
         # Pete request to me
-        context['friend_to_me'] = Friend.objects.filter(Q(from_user=profile.user) & Q(to_user=self.request.user)).first()
-        # I requested to this person
-        context['me_to_friend'] = Friend.objects.filter(Q(to_user=profile.user) & Q(from_user=self.request.user)).first()
+        if self.request.user.is_authenticated:
+            context['friend_to_me'] = Friend.objects.filter(Q(from_user=profile.user) & Q(to_user=self.request.user)).first()
+            # I requested to this person
+            context['me_to_friend'] = Friend.objects.filter(Q(to_user=profile.user) & Q(from_user=self.request.user)).first()
         return context
 
 
