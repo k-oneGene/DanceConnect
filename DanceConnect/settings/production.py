@@ -25,8 +25,8 @@ STRIPE_PUBLISHABLE = os.environ.get('STRIPE_PUBLISHABLE', "pk_test_rfr8px0xKxm5H
 STRIPE_SECRET = os.environ.get('STRIPE_SECRET', "sk_test_nWwphAFJYtQ9iBle59hhKwOC")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-DEBUG = os.environ.get('DEBUG', False)
+DEBUG = False
+# DEBUG = os.environ.get('DEBUG', False)
 
 ALLOWED_HOSTS = ['danceconnect.herokuapp.com', 'danceconnect2.herokuapp.com']
 
