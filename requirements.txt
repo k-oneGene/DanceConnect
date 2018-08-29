@@ -52,7 +52,7 @@ pexpect==4.6.0
 pickleshare==0.7.4
 Pillow==5.2.0
 prompt-toolkit==1.0.15
-psycopg2-binary==2.7.4
+psycopg2-binary
 ptyprocess==0.6.0
 pyasn1==0.4.4
 pycparser==2.18
