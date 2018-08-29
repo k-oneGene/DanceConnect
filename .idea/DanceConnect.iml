@@ -14,10 +14,11 @@
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
       <excludeFolder url="file://$MODULE_DIR$/venv_old" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.6 (DanceConnect)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.7 (DanceConnect)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Django Lib" level="project" />
   </component>

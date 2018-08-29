@@ -1,0 +1,15 @@
+[Unit]
+Description=Gunicorn server for DOMAIN
+
+[Service]
+Restart=on-failure
+User=jin
+WorkingDirectory=/home/jin/sites/DOMAIN
+EnvironmentFile=/home/jin/sites/DOMAIN/.env
+
+ExecStart=/home/jin/sites/DOMAIN/.venv/bin/gunicorn \
+    --bind unix:/tmp/DOMAIN.socket \
+    DanceConnect.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
